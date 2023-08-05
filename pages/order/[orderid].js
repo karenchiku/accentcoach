@@ -6,12 +6,13 @@ import utilStyles from '../../styles/utils.module.css'
 import formStyles from '../../styles/form.module.css'
 
 export default function paymentsucess() {
-
+ 
     const router = useRouter();
     const { orderid } = router.query;
     const [booking, setBooking] = useState([]);
     const [isloading, setIsLoading] = useState(false);
     useEffect(() => {
+   
         const fetchData = async () => {
 
             await fetch('/api/get-booking', {
@@ -26,8 +27,9 @@ export default function paymentsucess() {
                     if (data) {
                         setBooking(data);
                         // console.log(booking)
-                        setIsLoading(false);
+                        
                     }
+                    setIsLoading(false);
 
                 })
                 .catch(error => {
@@ -53,7 +55,7 @@ export default function paymentsucess() {
                 <title>{siteTitle}</title>
                 <meta name="robots" content="noindex,nofollow" />
             </Head>
-            {!isloading ? (
+            {/* {!isloading ? ( */}
                 <section>
                     <div className={`${utilStyles.textMd} ${formStyles.content}`}>
                         <div className={formStyles.formtitle}>
@@ -91,7 +93,8 @@ export default function paymentsucess() {
                             </div>
                         </div>
                     </div>
-                </section>) : null}
+                </section>
+                {/* ) : null} */}
         </Layout>
     );
 };

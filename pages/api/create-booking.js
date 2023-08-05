@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     try {
       await pool.connect();
 
-       const orderid = `aacp${(new Date()).getTime()}`;
+       const orderid = `aacp${(new Date()).getTime()}${Math.floor(Math.random() * 100)}`;
       const {  username, phone, email, itemname, amount, bookingdate } = req.body;
       const request = new sql.Request(pool);
       request.input('username', sql.NVarChar, username);

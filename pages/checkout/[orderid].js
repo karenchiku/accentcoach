@@ -62,7 +62,7 @@ export default function Payment() {
         for (const key in data) {
           if (data.hasOwnProperty(key)) {
             const input = document.createElement("input");
-            input.type = "text";
+            input.type = "hidden"
             input.name = key;
             console.log(data[key])
             input.value = data[key];

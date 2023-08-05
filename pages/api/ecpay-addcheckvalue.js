@@ -11,7 +11,7 @@ export default async function ecpayinfo(req, res) {
 
     let data = {
       MerchantID: MERCHANT_ID,
-      MerchantTradeNo: `${orderid}${Math.floor(Math.random() * 100)}`, // 產生一個唯一的訂單編號
+      MerchantTradeNo: orderid, // 產生一個唯一的訂單編號
       MerchantTradeDate: new Date().toISOString().substring(0, 19).replace('T', ' ').replace('-', '/').replace('-', '/'), // 訂單建立日期時間，格式為 yyyy/MM/dd HH:mm:ss
       PaymentType: 'aio',
       TotalAmount: amount, // 訂單總金額
@@ -27,7 +27,7 @@ export default async function ecpayinfo(req, res) {
 
     const checkMacValue = computeCheckMacValue(data);
     data.CheckMacValue = checkMacValue;
-    console.log(data)
+    // console.log(data)
     res.status(200).send(data);
   } else {
     res.status(404).end();
