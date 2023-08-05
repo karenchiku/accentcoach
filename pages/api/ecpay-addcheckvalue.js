@@ -3,7 +3,7 @@ import { computeCheckMacValue } from '../../components/utils/checkmachinevalue';
 
 const ECPAY_PAYMENT_API_URL = 'https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5';
 
-const MERCHANT_ID = process.env.MerchantID;
+const MERCHANT_ID = process.env.MERCHANT_ID;
 
 export default async function ecpayinfo(req, res) {
   if (req.method === 'POST') {
