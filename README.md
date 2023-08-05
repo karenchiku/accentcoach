@@ -1,1 +1,1 @@
-This is a CHIA-HUA KU Personal Website
+This is Accent Coach Website
