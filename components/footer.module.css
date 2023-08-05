@@ -1,0 +1,67 @@
+.bgcontainer {
+  background-color: #fff;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.container {
+  max-width: 75rem;
+  padding: 1.5rem 2rem;
+  margin: 0 auto;
+  position: relative;
+}
+
+.menu {
+  padding: 0 4rem;
+  
+}
+
+.info{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4rem;
+}
+
+.icon img{
+  width: 15%;
+}
+
+.newletter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+.undertext{
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.menu a {
+  padding-bottom: 5px;
+  text-decoration: none;
+}
+
+.menu a:link,
+.menu a:visited {
+  color: #000000;
+}
+
+.menu a:hover,
+.menu a:active {
+  background-position-x: left;
+}
+
+@media (max-width: 1000px) {
+  .info{
+    display: block;
+  
+  }
+  .menu {
+    width: 50%;
+    margin-bottom: 2rem;
+    padding: 0;
+  }
+  
+}

@@ -1,0 +1,16 @@
+.container {
+  padding: 0;
+  margin: 0;
+  /* background-color: blue; */
+  position: relative;
+}
+
+.children{
+  max-width: 65rem;
+  padding: 1.5rem 2rem;
+  margin: 0 auto;
+  /* background-color: brown; */
+
+}
+
+
