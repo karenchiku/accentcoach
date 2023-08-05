@@ -27,9 +27,9 @@ export default function paymentsucess() {
                     if (data) {
                         setBooking(data);
                         // console.log(booking)
-                        
+                        setIsLoading(true);
                     }
-                    setIsLoading(false);
+                    
 
                 })
                 .catch(error => {
@@ -38,7 +38,7 @@ export default function paymentsucess() {
         }
 
         fetchData();
-        setIsLoading(true);
+        // setIsLoading(true);
     }, [orderid])
 
 
@@ -55,7 +55,7 @@ export default function paymentsucess() {
                 <title>{siteTitle}</title>
                 <meta name="robots" content="noindex,nofollow" />
             </Head>
-            {/* {!isloading ? ( */}
+            {!isloading ? (
                 <section>
                     <div className={`${utilStyles.textMd} ${formStyles.content}`}>
                         <div className={formStyles.formtitle}>
@@ -94,7 +94,7 @@ export default function paymentsucess() {
                         </div>
                     </div>
                 </section>
-                {/* ) : null} */}
+                ) : null}
         </Layout>
     );
 };

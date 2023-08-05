@@ -11,14 +11,17 @@ const HASH_KEY = process.env.HASH_KEY;
 const HASH_IV = process.env.HASH_IV;
 
 export default async function ecpaycallback(req, res) {
-  // if (req.method !== 'POST') {
-  //   return res.status(405).end(); // Method Not Allowed
-  // }
+  if (req.method !== 'POST') {
+    return res.status(405).end(); // Method Not Allowed
+  }
 
   const { RtnCode, RtnMsg, MerchantID, MerchantTradeNo, PaymentDate, PaymentType, PaymentTypeChargeFee, TradeNo, TradeDate, TradeAmt, CheckMacValue } = req.body
   const data = req.body
+
+  delete data.CheckMacValue;
   const calculateCheckMacValue = computeCheckMacValue(data);
   // console.log(data)
+
   if (1 == 1) {  // chage to chcekmacvalue
     await handleResult(RtnCode, RtnMsg, MerchantID, MerchantTradeNo, PaymentDate, PaymentType, PaymentTypeChargeFee, TradeNo, TradeDate, TradeAmt, CheckMacValue, calculateCheckMacValue)
     res.status(200).send('1|OK')
