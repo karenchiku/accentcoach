@@ -7,28 +7,4 @@
     cursor: pointer;
     
   }
-  .up:hover {
 
-    /* box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);  */
-  }
-  
-/* 
-  .goToTopButton {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    padding: 0.5rem 1rem;
-    background-color: #000;
-    color: #fff;
-    border: none;
-    border-radius:10px;
-    cursor: pointer;
-    opacity: 0.8;
-    transition: opacity 0.3s ease-in-out;
-  
-   
-  }
-  .goToTopButton:hover {
-    opacity: 1;
-  }
-   */

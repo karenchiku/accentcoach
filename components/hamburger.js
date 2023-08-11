@@ -6,16 +6,13 @@ import Image from 'next/image';
 export default function () {
     return (
 
-        <div className={hamburgerStyles.header}>
+        // <div className={hamburgerStyles.header}>
             <div className={hamburgerStyles.nav}>
-            <span className={hamburgerStyles.logoicon}>
-           <img
-                    src="/images/accent l.svg"
-                    className={hamburgerStyles.logoimg}
-                />
+                <span className={hamburgerStyles.logoicon}>
+                    <img src="/images/accent l.svg"
+                        className={hamburgerStyles.logoimg} />
                     <Link href="/"> Accent Coach</Link>
                 </span>
-
 
                 <input id="hamburger-toggle" className={hamburgerStyles.hamburgertoggle} type="checkbox" />
                 <label className={hamburgerStyles.hamburger} for="hamburger-toggle">
@@ -30,6 +27,6 @@ export default function () {
                 </ul>
 
             </div>
-        </div>
+        // </div>
     )
 }

@@ -15,11 +15,11 @@ export default function Home() {
       </Head>
 
       <section className={`${utilStyles.headingMd}`}>
-        
+
         <h1 className={utilStyles.heading2Xl}>American Accent Private Coach</h1>
         <div className={utilStyles.flexcc}>
-          {language === 'en' ? '>' : ''}<div className={language === 'en'? utilStyles.selected : utilStyles.button } onClick={() => setLanguage('en')}>English</div>{language === 'en' ? '<' : ''}
-          {language === 'zh' ? '>' : ''}<div className={language === 'zh'? utilStyles.selected : utilStyles.button } onClick={() => setLanguage('zh')}>中文</div>{language === 'zh' ? '<' : ''}
+          {language === 'en' ? '>' : ''}<div className={language === 'en' ? utilStyles.selected : utilStyles.button} onClick={() => setLanguage('en')}>English</div>{language === 'en' ? '<' : ''}
+          {language === 'zh' ? '>' : ''}<div className={language === 'zh' ? utilStyles.selected : utilStyles.button} onClick={() => setLanguage('zh')}>中文</div>{language === 'zh' ? '<' : ''}
         </div>
       </section>
 
@@ -48,7 +48,7 @@ export default function Home() {
         <h3>
           {language === 'en' ? `We don't get to choose every aspect of our identities but we CAN CHOOSE some!` : '我們不能選擇自己各方面的身份, 但我們可以選擇其中的一部分'}
         </h3>
-    
+
         <div className={`${utilStyles.textMd} ${utilStyles.textbox}`}>
           <p>{language === 'en' ? '- speak smoothly' : ' -  說話流暢'}</p>
           <p>{language === 'en' ? '- build confidence' : ' - 建立自信'}</p>
@@ -96,7 +96,7 @@ export default function Home() {
         <div className={utilStyles.flexc}>
           <div className={utilStyles.five}>
 
-          <div className={`${utilStyles.textMd} ${utilStyles.textbox}`}>
+            <div className={`${utilStyles.textMd} ${utilStyles.textbox}`}>
               <p>{language === 'en' ? ' - play' : ' - 遊戲'}</p>
               <p>{language === 'en' ? ' - picture' : ' - 圖片'}</p>
               <p>{language === 'en' ? ' - movement' : ' - 動作'}</p>
@@ -107,7 +107,7 @@ export default function Home() {
           </div>
           <div className={utilStyles.five}>
 
-          <div className={`${utilStyles.textMd} ${utilStyles.textbox}`}>
+            <div className={`${utilStyles.textMd} ${utilStyles.textbox}`}>
               <p>{language === 'en' ? ' - must know some English' : ' - 必須具備一定的英語能力'}</p>
               <p>{language === 'en' ? ' - consistent study' : ' - 持續學習'}</p>
               <p>{language === 'en' ? ' - recorder' : ' - 錄音裝置'}</p>
@@ -246,7 +246,7 @@ export default function Home() {
           </div>
         </div>
         <div className={utilStyles.flexccc}>
-        <div className={`${utilStyles.textMd} ${utilStyles.textbox}`}>
+          <div className={`${utilStyles.textMd} ${utilStyles.textbox}`}>
             <p>{language === 'en' ? ` - Run through speaking all sound of American English` : ' - 以美式英語口音進行朗讀練習'}</p>
             <p>{language === 'en' ? ` - Analyze hearing sensitivity` : ' - 分析聽覺敏感度'}</p>
             <p>{language === 'en' ? ` - Results for specifics of individual sound tuning` : ' - 分析個別聲音調整的具體結果'}</p>
@@ -278,15 +278,27 @@ export default function Home() {
 
       <section className={utilStyles.headingMd}>
         <h1 className={utilStyles.headingXl}>
-        {language === 'en' ? 'Q&A' : 'Q&A'} </h1>
-
-        {/* <div className={indexStyle.qacontrainer}>
-    
-        </div> */}
-
-       
+          {language === 'en' ? 'Q&A' : 'Q&A'} </h1>
+        <div className={`${utilStyles.textMd} ${utilStyles.textbox}`}>
+          <div className={formStyles.qacontrainer}>
+            <div className={formStyles.question}>1.上課前需要準備什麼?</div>
+            <div className={formStyles.answer}>不需要任何事前準備, 先到體驗區錄音傳送檔案給我們</div>
+          </div>
+          <div className={formStyles.qacontrainer}>
+            <div className={formStyles.question}>2.怎麼預約課程?</div>
+            <div className={formStyles.answer}>透過官網預約, </div>
+          </div> 
+          <div className={formStyles.qacontrainer}>
+            <div className={formStyles.question}>3.我們會在哪裡上課?</div>
+            <div className={formStyles.answer}>會依照時間安排共享空間小型會議室, 例如https://thehapp.com/space/487</div>
+          </div>
+          <div className={formStyles.qacontrainer}>
+            <div className={formStyles.question}>4.課後可以怎麼持續練習?</div>
+            <div className={formStyles.answer}>課後老師會給你對發音上客製針, 我們會提供練習區, </div>
+          </div>
+        </div>
       </section>
- 
+
     </Layout >
   )
 }
