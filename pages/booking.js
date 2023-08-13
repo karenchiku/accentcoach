@@ -89,14 +89,14 @@ export default function Order() {
           <div className={utilStyles.flexc}>
             <div className={formStyles.twomode}>
               <h1 className={formStyles.twomodeheader}>Child</h1>
-              <h3 className={formStyles.clickoption} onClick={()=>{setAmount(2500) ; setItemName('小孩-2500')}}>(1) 2000/hr NTD</h3>
-              <h3 className={formStyles.clickoption} onClick={()=>{setAmount(3000) ; setItemName('小孩-3000')}}>(2) 3000/hr NTD</h3>
+              <h3>(1) 2000/hr NTD</h3>
+              <h3>(2) 3000/hr NTD</h3>
               
 
             </div>
             <div className={formStyles.twomode}>
               <h1 className={formStyles.twomodeheader}>Adult</h1>
-              <h3 className={formStyles.clickoption} onClick={()=>{setAmount(3000) ; setItemName('大人-3000')}}>3000/hr NTD</h3>
+              <h3>3000/hr NTD</h3>
          
             </div>
           </div>
@@ -143,8 +143,7 @@ export default function Order() {
           <div className={utilStyles.textSm}>
             <div className={utilStyles.pbold}>注意事項</div>
             <p>*請務必填寫正確<span className={utilStyles.pbold}>電話與email</span>, 可以透過填寫資料<Link href="/searchbooking">查詢</Link>目前預約狀態</p>
-            <p>*預約會預收20%費用做為訂金, 例如大人一小時課程為例, 預收款為 3000*0.2 = NTD 600, 剩下之金額為當日繳交</p>
-            <p>*取消請提前三日告知退回訂金，若超過三日含以下則不退回訂金, 例如2023/8/2 14:00, 請在2023/7/30 14:00前提出取消, 方可退回訂金</p>
+            <p>*退款政策:可以完全退款, 取消並退款請在48hrs前email通知，若在48hrs內則不退回款項</p>
             <p>*上課時間為指定時段, 請準時抵達教室</p>
  
             

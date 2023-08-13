@@ -81,7 +81,7 @@ export default function querybooking() {
 
             <div className={utilStyles.textSm}>
               <div className={utilStyles.pbold}>注意事項</div>
-              <p>*請務必填寫正確預約時填寫的<span className={utilStyles.pbold}>電話與email</span></p>
+              <p>*請務必填寫與預約時相同的<span className={utilStyles.pbold}>電話與email</span></p>
 
             </div>
           </div>

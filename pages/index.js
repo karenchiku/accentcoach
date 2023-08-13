@@ -278,27 +278,30 @@ export default function Home() {
 
       <section className={utilStyles.headingMd}>
         <h1 className={utilStyles.headingXl}>
-          {language === 'en' ? 'Q&A' : 'Q&A'} </h1>
+          {language === 'en' ? 'FAQ' : 'FAQ'} </h1>
         <div className={`${utilStyles.textMd} ${utilStyles.textbox}`}>
-          <div className={formStyles.qacontrainer}>
-            <div className={formStyles.question}>1.上課前需要準備什麼?</div>
-            <div className={formStyles.answer}>不需要任何事前準備, 先到體驗區錄音傳送檔案給我們</div>
+          <div className={formStyles.faqcontanier}>
+            <div className={formStyles.question}>{language === 'en' ? '1.Do I need to prepare anything beforehand?' : '1.上課前需要準備什麼?'}</div>
+            <div className={formStyles.answer}>{language==='en' ? 'Please make sure to send your sample recording before your session. *Link*' : '請務必先到體驗區錄下您的口說錄音'}</div>
           </div>
-          <div className={formStyles.qacontrainer}>
-            <div className={formStyles.question}>2.怎麼預約課程?</div>
-            <div className={formStyles.answer}>透過官網預約, </div>
+          <div className={formStyles.faqcontanier}>
+            <div className={formStyles.question}>{language ==='en' ?'2. How do I sign up?':'2.怎麼預約課程?'}</div>
+            <div className={formStyles.answer}>{language ==='en'?' *Link* 100% Refundable over 48 hours before session':'預約, 課程開始前48小時前全額退款'}</div>
           </div> 
-          <div className={formStyles.qacontrainer}>
-            <div className={formStyles.question}>3.我們會在哪裡上課?</div>
-            <div className={formStyles.answer}>會依照時間安排共享空間小型會議室, 例如https://thehapp.com/space/487</div>
+          <div className={formStyles.faqcontanier}>
+            <div className={formStyles.question}>{language === 'en'? '3. Where is the class located?':'3.我們會在哪裡上課?'}</div>
+            <div className={formStyles.answer}>{language === 'en' ?'Indoor community area 5 minute walk from Jiantan MRT station':''}</div>
           </div>
-          <div className={formStyles.qacontrainer}>
-            <div className={formStyles.question}>4.課後可以怎麼持續練習?</div>
-            <div className={formStyles.answer}>課後老師會給你對發音上客製針, 我們會提供練習區, </div>
+          <div className={formStyles.faqcontanier}>
+            <div className={formStyles.question}>{language === 'en' ?"4. How do I know if I'm improving?":'4.我怎麼持續進步？'}</div>
+            <div className={formStyles.answer}>{language === 'en' ?"Recordings from each class + homework assignments will be proof of progress.":''}</div>
+          </div>
+          <div className={formStyles.faqcontanier}>
+            <div className={formStyles.question}>{language === 'en' ?"5. I know it's an accent class, but is it also an English language class?":'5.我知道這是一我知道這是一'}</div>
+            <div className={formStyles.answer}>{language === 'en' ?'No. You will most certainly be introduced to new vocabulary and inevitably be taught how to use them, but this is not designed to be an English course. If you want, you may also sign up for customized English classes for learning if deemed eligible.  Your American accent coach does not speak Chinese.':''}</div>
           </div>
         </div>
       </section>
-
     </Layout >
   )
 }

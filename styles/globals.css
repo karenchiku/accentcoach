@@ -60,6 +60,6 @@ tr:nth-child(even) {
 }
 section{
   margin: 0;
-  background-color: rgb(153, 153, 253);
+  /* background-color: rgb(153, 153, 253); */
 }
 
