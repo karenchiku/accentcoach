@@ -286,18 +286,18 @@ export default function Home() {
           </div>
           <div className={formStyles.faqcontanier}>
             <div className={formStyles.question}>{language ==='en' ?'2. How do I sign up?':'2.怎麼預約課程?'}</div>
-            <div className={formStyles.answer}>{language ==='en'?' *Link* 100% Refundable over 48 hours before session':'預約, 課程開始前48小時前全額退款'}</div>
+            <div className={formStyles.answer}>{language ==='en'?' *Link* 100% Refundable over 48 hours before session':'在這裡Here預約, 取消課程, 在開始前48小時前可以申請全額退款'}</div>
           </div> 
           <div className={formStyles.faqcontanier}>
             <div className={formStyles.question}>{language === 'en'? '3. Where is the class located?':'3.我們會在哪裡上課?'}</div>
-            <div className={formStyles.answer}>{language === 'en' ?'Indoor community area 5 minute walk from Jiantan MRT station':''}</div>
+            <div className={formStyles.answer}>{language === 'en' ?'Indoor community area 5 minute walk from Jiantan MRT station':'室內開放空間, 距離劍潭捷運站走路5分鐘'}</div>
           </div>
           <div className={formStyles.faqcontanier}>
             <div className={formStyles.question}>{language === 'en' ?"4. How do I know if I'm improving?":'4.我怎麼持續進步？'}</div>
-            <div className={formStyles.answer}>{language === 'en' ?"Recordings from each class + homework assignments will be proof of progress.":''}</div>
+            <div className={formStyles.answer}>{language === 'en' ?"Recordings from each class + homework assignments will be proof of progress.":'課堂上您可以錄音, 完成指派的回家作業, '}</div>
           </div>
           <div className={formStyles.faqcontanier}>
-            <div className={formStyles.question}>{language === 'en' ?"5. I know it's an accent class, but is it also an English language class?":'5.我知道這是一我知道這是一'}</div>
+            <div className={formStyles.question}>{language === 'en' ?"5. I know it's an accent class, but is it also an English language class?":'5.我知道這是一台美式口音課程, 但這也是一堂英文課？'}</div>
             <div className={formStyles.answer}>{language === 'en' ?'No. You will most certainly be introduced to new vocabulary and inevitably be taught how to use them, but this is not designed to be an English course. If you want, you may also sign up for customized English classes for learning if deemed eligible.  Your American accent coach does not speak Chinese.':''}</div>
           </div>
         </div>

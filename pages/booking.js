@@ -143,11 +143,8 @@ export default function Order() {
           <div className={utilStyles.textSm}>
             <div className={utilStyles.pbold}>注意事項</div>
             <p>*請務必填寫正確<span className={utilStyles.pbold}>電話與email</span>, 可以透過填寫資料<Link href="/searchbooking">查詢</Link>目前預約狀態</p>
-            <p>*退款政策:可以完全退款, 取消並退款請在48hrs前email通知，若在48hrs內則不退回款項</p>
-            <p>*上課時間為指定時段, 請準時抵達教室</p>
- 
-            
-          
+            <p>*取消政策:免費取消, 預約上課時間前48小時前取消可全額退款</p>
+            <p>*上課時間為指定時段, 請準時抵達教室</p>          
           </div>
 
         </div>
