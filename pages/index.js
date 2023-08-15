@@ -2,11 +2,21 @@ import Head from 'next/head'
 import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
 import formStyles from '../styles/form.module.css'
+import Link from 'next/link'
 
-import React, { useState } from 'react'
+import React, { useDebugValue, useState } from 'react'
 
 export default function Home() {
-  const [language, setLanguage] = useState('zh')
+  const [language, setLanguage] = useState('zh');
+  const [questionopen, setQuestionopen] = useState([false, false, false, false, false]);
+
+  const [q1option, setQ1option] = useState(false); 
+  const [q2option, setQ2option] = useState(false); 
+  const [q3option, setQ3option] = useState(false); 
+  const [q4option, setQ4option] = useState(false); 
+  const [q5option, setQ5option] = useState(false); 
+
+
 
   return (
     <Layout>
@@ -43,7 +53,8 @@ export default function Home() {
       <div className={utilStyles.space}></div>
       <section className={utilStyles.headingMd}>
         <h1 className={utilStyles.headingXl}>
-          {language === 'en' ? 'Why ?' : '為什麼 ?'} </h1>
+          {language === 'en' ? 'Why ?' : '為什麼 ?'}
+        </h1>
 
         <h3>
           {language === 'en' ? `We don't get to choose every aspect of our identities but we CAN CHOOSE some!` : '我們不能選擇自己各方面的身份, 但我們可以選擇其中的一部分'}
@@ -281,25 +292,72 @@ export default function Home() {
           {language === 'en' ? 'FAQ' : 'FAQ'} </h1>
         <div className={`${utilStyles.textMd} ${utilStyles.textbox}`}>
           <div className={formStyles.faqcontanier}>
-            <div className={formStyles.question}>{language === 'en' ? '1.Do I need to prepare anything beforehand?' : '1.上課前需要準備什麼?'}</div>
-            <div className={formStyles.answer}>{language==='en' ? 'Please make sure to send your sample recording before your session. *Link*' : '請務必先到體驗區錄下您的口說錄音'}</div>
+            <div className={formStyles.question} >
+              <p>{language === 'en' ? '1.Do I need to prepare anything beforehand?' : '1.上課前需要準備什麼?'}</p>
+              
+              {q1option 
+              ? <img src='/icon/up_icon.png' onClick={() => setQ1option(false)}></img>
+              :  <img src='/icon/down_icon.png' onClick={() => setQ1option(true)}></img>
+            }            
+           </div>
+         {q1option &&
+              <div className={formStyles.answer}>
+                {language === 'en' ? 
+                <p>Please make sure to send your sample recording before your session. <Link href="/new">Here</Link> </p> :<p>請務必先到 <Link href="/new">Here</Link> 錄下您的口說錄音</p>}
+              </div>
+         }
+         </div>
+          <div className={formStyles.faqcontanier}>
+            <div className={formStyles.question}>
+              <p>{language === 'en' ? '2. How do I sign up?' : '2.怎麼預約課程?'}</p>
+              {q2option 
+              ? <img src='/icon/up_icon.png' onClick={() => setQ2option(false)}></img>
+              :  <img src='/icon/down_icon.png' onClick={() => setQ2option(true)}></img>
+            }    
+            </div>
+            {q2option &&
+              <div className={formStyles.answer}>
+                {language === 'en' ? 
+                <p><Link href="/booking">Here</Link> 100% Refundable over 48 hours before session</p> : <p> 在這裡 <Link href="/booking">Here</Link>預約, 在開始前48小時前取消免費退款</p>}
+              </div>
+            }
           </div>
           <div className={formStyles.faqcontanier}>
-            <div className={formStyles.question}>{language ==='en' ?'2. How do I sign up?':'2.怎麼預約課程?'}</div>
-            <div className={formStyles.answer}>{language ==='en'?' *Link* 100% Refundable over 48 hours before session':'在這裡Here預約, 取消課程, 在開始前48小時前可以申請全額退款'}</div>
-          </div> 
-          <div className={formStyles.faqcontanier}>
-            <div className={formStyles.question}>{language === 'en'? '3. Where is the class located?':'3.我們會在哪裡上課?'}</div>
-            <div className={formStyles.answer}>{language === 'en' ?'Indoor community area 5 minute walk from Jiantan MRT station':'室內開放空間, 距離劍潭捷運站走路5分鐘'}</div>
+            <div className={formStyles.question}>
+              {language === 'en' ? '3. Where is the class located?' : '3.我們會在哪裡上課?'}
+              {q3option 
+              ? <img src='/icon/up_icon.png' onClick={() => setQ3option(false)}></img>
+              :  <img src='/icon/down_icon.png' onClick={() => setQ3option(true)}></img>
+            }    
+            </div>
+            {q3option &&
+              <div className={formStyles.answer}>{language === 'en' ? 'Indoor community area 5 minute walk from Jiantan MRT station' : '安排在室內開放空間, 距離劍潭捷運站走路約5分鐘'}</div>
+            }
           </div>
           <div className={formStyles.faqcontanier}>
-            <div className={formStyles.question}>{language === 'en' ?"4. How do I know if I'm improving?":'4.我怎麼持續進步？'}</div>
-            <div className={formStyles.answer}>{language === 'en' ?"Recordings from each class + homework assignments will be proof of progress.":'課堂上您可以錄音, 完成指派的回家作業, '}</div>
-          </div>
+            <div className={formStyles.question}>
+              {language === 'en' ? "4. How do I know if I'm improving?" : '4.我怎麼持續進步？'}
+              {q4option 
+              ? <img src='/icon/up_icon.png' onClick={() => setQ4option(false)}></img>
+              :  <img src='/icon/down_icon.png' onClick={() => setQ4option(true)}></img>
+            }    
+            </div>
+            {q4option &&
+            <div className={formStyles.answer}>{language === 'en' ? "Recordings from each class + homework assignments will be proof of progress." : '在課堂上您可以錄音, 課後完成指派的回家作業'}</div>
+            }
+            </div>
           <div className={formStyles.faqcontanier}>
-            <div className={formStyles.question}>{language === 'en' ?"5. I know it's an accent class, but is it also an English language class?":'5.我知道這是一台美式口音課程, 但這也是一堂英文課？'}</div>
-            <div className={formStyles.answer}>{language === 'en' ?'No. You will most certainly be introduced to new vocabulary and inevitably be taught how to use them, but this is not designed to be an English course. If you want, you may also sign up for customized English classes for learning if deemed eligible.  Your American accent coach does not speak Chinese.':''}</div>
-          </div>
+            <div className={formStyles.question}>
+              {language === 'en' ? "5. I know it's an accent class, but is it also an English language class?" : '5.我知道這是美式口音課程, 但這也是英文課？'}
+              {q5option 
+              ? <img src='/icon/up_icon.png' onClick={() => setQ5option(false)}></img>
+              :  <img src='/icon/down_icon.png' onClick={() => setQ5option(true)}></img>
+            }     
+            </div>
+            {q5option &&
+            <div className={formStyles.answer}>{language === 'en' ? 'No. You will most certainly be introduced to new vocabulary and inevitably be taught how to use them, but this is not designed to be an English course. If you want, you may also sign up for customized English classes for learning if deemed eligible.  Your American accent coach does not speak Chinese.' : '不是。你肯定會接觸到一些新詞彙，不能避免老師會教您如何使用它們，但本課程並不是設計為一堂英語課程。如果有意願也符合資格的話，也跟我們報名專門客制的英語課程。美式口語老師在課堂上不會使用中文。'}</div>
+            }
+            </div>
         </div>
       </section>
     </Layout >

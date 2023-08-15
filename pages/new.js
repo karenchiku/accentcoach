@@ -10,13 +10,14 @@ export default function paymentsucess() {
     const [email, setEmail] = useState('');
     const [isValidEmail, setIsValidEmail] = useState(true);
     const [username, setUserName] = useState('');
-    // const router = useRouter();
     const [recording, setRecording] = useState(false);
     const [audioURL, setAudioURL] = useState('');
     const mediaRecorderRef = useRef(null);
     const audioChunksRef = useRef([]);
-
-    const [ishasRecording, setIshasRecording] = useState(false);
+    const [audiobuffer, setAudioBuffer] = useState(null);
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [isHasRecording, setIshasRecording] = useState(false);
+    const [isSentRecording, setSentRecording] = useState(false);
 
     const handleStartRecording = async () => {
         setAudioURL('');
@@ -27,10 +28,12 @@ export default function paymentsucess() {
                 audioChunksRef.current.push(event.data);
             }
         };
-        mediaRecorderRef.current.onstop = () => {
+        mediaRecorderRef.current.onstop = async () => {
             const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
+            // console.log(await audioBlob.arrayBuffer());
+            setAudioBuffer (await audioBlob.arrayBuffer().toString('base64'));
             const audioUrl = URL.createObjectURL(audioBlob);
-            console.log(audioUrl);
+            // console.log(audioUrl);
             setAudioURL(audioUrl);
             audioChunksRef.current = [];
         };
@@ -51,11 +54,53 @@ export default function paymentsucess() {
         setIsValidEmail(isValid);
     };
 
-    const handleSubmitRecording = () => {
-        setIshasRecording(true);
-
+    const handleSubmitRecording = async () => {
+        if(email && username){
+            SubmitRecording()
+        }
+        else{
+            alert('請輸入完整的email和電話')
+        }
     };
+    const SubmitRecording = async () => {
+        setIsSubmitting(true);
+        setSentRecording(false);
+        
+        const responserecording = await fetch('/api/get-recording', {
+            method: 'POST',
+            body: JSON.stringify({ email }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        const datarecording = await responserecording.json();
 
+        if (datarecording.length != 0) {
+            // console.log(datarecording);
+            setIshasRecording(true);
+        } else {
+
+            console.log('start recording');
+            await fetch('/api/create-recording', {
+                method: 'POST',
+                body: JSON.stringify({ username, email, audiobuffer }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.result == 'ok') {
+                        setSentRecording(true);
+
+                    }
+                })
+                .catch((err) => {
+                    console.error(err);
+                })
+        }
+        setIsSubmitting(false);
+    }
     return (
         <Layout>
             <Head>
@@ -96,8 +141,10 @@ export default function paymentsucess() {
                                 {!isValidEmail && <p className={formStyles.invalid}>請輸入正確email</p>}
                             </div>
                             <div className={utilStyles.flexcc}>
-                                {ishasRecording ? (<p className={formStyles.invalid}>已傳送過一次錄音, 請等待老師回覆</p>) 
-                                : (<button className={formStyles.button} onClick={handleSubmitRecording}>傳送錄音</button>)}
+                                { !isHasRecording && !isSentRecording && <button className={formStyles.button} onClick={handleSubmitRecording}>傳送錄音</button>}
+                                {isSubmitting && <p>傳送中...</p>}
+                                {isHasRecording && <p>未傳送, 相同信箱已傳送過錄音!</p>}
+                                {isSentRecording && <p>已傳送</p>}
                             </div>
                             <div className={utilStyles.textSm}>
                                 <div className={utilStyles.pbold}>注意事項</div>

@@ -33,7 +33,6 @@ export default async function ecpayinfo(req, res) {
     res.status(404).end();
   }
 
-
 };
 
 // // 計算 CheckMacValue

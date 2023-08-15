@@ -9,16 +9,17 @@ export default async function handler(req, res) {
     try {
       await pool.connect();
 
-      const { email } = req.body;
+      const { username, email, audiobuffer } = req.body;
       const request = new sql.Request(pool);
-      request.input('email', sql.VarChar, email);
- 
+      request.input('username', sql.NVarChar, username);
+      request.input('email', sql.NVarChar, email);
+      request.input('audiobuffer', sql.VarBinary, audiobuffer);
+
       const result = await request.query(`
-        INSERT INTO accentcoach_newsletter (email)
-        VALUES ( @email)
+        INSERT INTO accentcoach_recording (username, email, audiobuffer)
+        VALUES ( @username, @email, @audiobuffer)
       `);
-      
-      res.status(200).json({email});
+      res.status(200).json({"result": "ok"});
     } catch (err) {
       console.error(err);
       res.status(500).json({ message: 'Error creating newsletters' });

@@ -27,10 +27,14 @@ export default function querybooking() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    if( phone && email){
+        Submit();
+    }else{
+      alert('請輸入完整的email和電話')
+    }
+  };
+  const Submit = async (e) => {
     setIsSubmitting(true);
-
-    // Call your API to submit the order
     await fetch('/api/get-bookinghist', {
       method: 'POST',
       body: JSON.stringify({ username, phone, email }),
@@ -39,8 +43,7 @@ export default function querybooking() {
       }
     })
       .then(res => res.json())
-      .then(data => {
-
+      .then(data => {ß
         setOrders(data)
         if (data) {
           setIsOrders(true);
@@ -50,7 +53,7 @@ export default function querybooking() {
         console.log(error);
       });
     setIsSubmitting(false);
-  };
+  }
 
 
   return (

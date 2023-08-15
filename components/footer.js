@@ -56,7 +56,7 @@ export default function Footer() {
                         <p className={utilStyles.pbold}>Policy</p>
                         <p><Link href="/privacy">隱私權政策</Link></p>
                         <p><Link href="/terms">使用條款</Link></p>
-                        <p><Link href="/refund">退款政策</Link></p>
+                        {/* <p><Link href="/refund">退款政策</Link></p> */}
                     </div>
                     <div className={footerStyles.menu}>
                         <div className={footerStyles.icon}>

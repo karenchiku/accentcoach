@@ -52,7 +52,7 @@ export default function Order() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     setIsSubmitting(true);
 
     await fetch('/api/create-booking', {

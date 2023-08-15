@@ -9,25 +9,20 @@ export default async function handler(req, res) {
     try {
       await pool.connect();
 
-
       const { email } = req.body;
-      const request = new sql.Request(pool);
+      const query = `SELECT email FROM accentcoach_recording where email = '${email}'`;
+      const result = await pool.request().query(query);
 
-      request.input('email', sql.VarChar, email);
- 
-      const result = await request.query(`
-        INSERT INTO accentcoach_newsletter (email)
-        VALUES ( @email)
-      `);
-      res.status(200).json({email});
+      res.status(200).json(result.recordset);
     } catch (err) {
       console.error(err);
-      res.status(500).json({ message: 'Error creating newsletters' });
+      res.status(500).json({message: 'Error query recordings'});
     } finally {
       await pool.close();
     }
   } else {
     res.status(404).end();
   }
+
 
 }
