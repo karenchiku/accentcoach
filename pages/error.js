@@ -25,7 +25,7 @@ export default function paymentsucess() {
                         <h1>Error 404</h1>
                     </div>
                     <div>
-                        <div className={utilStyles.headingMd}><p>查詢錯誤</p></div>
+                        <div className={utilStyles.headingMd}><p>錯誤</p></div>
                         <div className={utilStyles.headingMd}><p>若找不到訂單請與服務人員聯繫</p></div>
                         <div className={utilStyles.flexcc}>
                             <button className={formStyles.button} onClick={handleClick}>返回主頁</button>

@@ -6,12 +6,14 @@ const pool = new sql.ConnectionPool(config);
 //0 init, 1 student confrimed, 2 pay completed, 3 teacher confirmed, 4 applied cancel, 6 refund completed
 
 export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).end(); // Method Not Allowed
+  }
 
-  if (req.method === 'POST') {
     try {
       await pool.connect();
 
-       const orderid = `aacp${(new Date()).getTime()}${Math.floor(Math.random() * 100)}`;
+       const orderid = `T${(new Date()).getTime()}${Math.floor(Math.random() * 100)}`;
       const {  username, phone, email, itemname, amount, bookingdate } = req.body;
       const request = new sql.Request(pool);
       request.input('username', sql.NVarChar, username);
@@ -25,7 +27,7 @@ export default async function handler(req, res) {
 
 
       const result = await request.query(`
-        INSERT INTO accentcoach_bookings (orderid, username, phone, email, itemname, amount, bookingdate, created_datetime, paytatus, bookstatus)
+        INSERT INTO accentcoach_bookings (orderid, username, phone, email, itemname, amount, bookingdate, created_datetime, paystatus, bookstatus)
         VALUES (@orderid, @username, @phone, @email, @itemname, @amount, @bookingdate, @created_datetime, 0,0)
       `);
 
@@ -36,9 +38,6 @@ export default async function handler(req, res) {
     } finally {
       await pool.close();
     }
-  } else {
-    res.status(404).end();
-  }
 
 
 }

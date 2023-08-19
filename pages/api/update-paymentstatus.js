@@ -5,8 +5,9 @@ const pool = new sql.ConnectionPool(config);
 //0 init, 1 student confrimed, 2 pay completed, 3 teacher confirmed, 4 applied cancel, 6 refund completed
 
 export default async function handler(req, res) {
-  
-  if (req.method === 'POST') {
+  if (req.method !== 'POST') {
+    return res.status(405).end(); // Method Not Allowed
+  }
     try {
       await pool.connect();
 
@@ -24,9 +25,5 @@ export default async function handler(req, res) {
     } finally {
       await pool.close();
     }
-  } else {
-    res.status(404).end();
-  }
-
 
 }

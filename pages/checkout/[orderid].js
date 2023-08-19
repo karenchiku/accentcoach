@@ -70,15 +70,15 @@ export default function Payment() {
           }
         }
         console.log(form)
-        // 將表單元素添加到網頁中
         document.body.appendChild(form);
-
-        // 提交表單
         form.submit();
-     
-      })
 
-      setIsSubmitting(false)
+        setIsSubmitting(false)
+      }).catch(error => {
+          console.log(error);
+          setIsSubmitting(false)
+      });
+     
   };
 
 

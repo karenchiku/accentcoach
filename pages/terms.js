@@ -11,7 +11,7 @@ export default function Privacy() {
         <div>
             <h3>使用條款</h3>
 
-            <p>日期：西元2019年8月20日</p>
+            <p>日期：西元2023年8月20日</p>
             <br />
             <p>版本：第1.1版</p>
             <br />

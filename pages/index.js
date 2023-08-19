@@ -4,18 +4,17 @@ import utilStyles from '../styles/utils.module.css'
 import formStyles from '../styles/form.module.css'
 import Link from 'next/link'
 
-import React, { useDebugValue, useState } from 'react'
+import React, { useState } from 'react'
 
 export default function Home() {
   const [language, setLanguage] = useState('zh');
   const [questionopen, setQuestionopen] = useState([false, false, false, false, false]);
 
-  const [q1option, setQ1option] = useState(false); 
-  const [q2option, setQ2option] = useState(false); 
-  const [q3option, setQ3option] = useState(false); 
-  const [q4option, setQ4option] = useState(false); 
-  const [q5option, setQ5option] = useState(false); 
-
+  const [q1option, setQ1option] = useState(false);
+  const [q2option, setQ2option] = useState(false);
+  const [q3option, setQ3option] = useState(false);
+  const [q4option, setQ4option] = useState(false);
+  const [q5option, setQ5option] = useState(false);
 
 
   return (
@@ -35,30 +34,31 @@ export default function Home() {
 
       <section>
         <div className={utilStyles.flexcc}>
-          <img
-            src="/images/accent a.svg"
+          <object
+            data="/svg/accent a animated.svg"
             className={utilStyles.imageslarge}
           />
+   
         </div>
         <h3 className={utilStyles.headingLg}>
           {language === 'en' ? `What you Look like != What you SOUND like` : ' 你看起來像什麼 != 你聽起來像什麼'}
         </h3>
         <div className={utilStyles.flexcc}>
-          <img
-            src="/images/accent b.svg"
+          <object
+            data="/svg/accent b animated.svg"
             className={utilStyles.imageslarge}
           />
         </div>
       </section>
-      <div className={utilStyles.space}></div>
+      {/* <div className={utilStyles.space}></div> */}
       <section className={utilStyles.headingMd}>
         <h1 className={utilStyles.headingXl}>
           {language === 'en' ? 'Why ?' : '為什麼 ?'}
         </h1>
 
-        <h3>
+        <h4>
           {language === 'en' ? `We don't get to choose every aspect of our identities but we CAN CHOOSE some!` : '我們不能選擇自己各方面的身份, 但我們可以選擇其中的一部分'}
-        </h3>
+        </h4>
 
         <div className={`${utilStyles.textMd} ${utilStyles.textbox}`}>
           <p>{language === 'en' ? '- speak smoothly' : ' -  說話流暢'}</p>
@@ -74,34 +74,34 @@ export default function Home() {
         </div>
 
       </section>
-      <div className={utilStyles.space}></div>
+      {/* <div className={utilStyles.space}></div> */}
       <section className={utilStyles.headingMd}>
         <h1 className={utilStyles.headingXl}>
           {language === 'en' ? 'Who is eligible ?' : '誰符合條件 ?'} </h1>
         <div>
           <div className={utilStyles.fiveinline}>
-            <h3>
+            <h4>
               {language === 'en' ? 'Children (3yrs - 14yrs)' : '小孩 (3yrs - 14yrs)'}
-            </h3>
+            </h4>
           </div>
           <div className={utilStyles.fiveinline}>
-            <h3>
+            <h4>
               {language === 'en' ? 'Adults (15yrs+)' : '大人 (15yrs+)'}
-            </h3>
+            </h4>
 
           </div>
         </div>
         <div >
           <div className={utilStyles.fiveinline}>
-            <h3>
+            <h4>
               {language === 'en' ? '"Subconscious Learning"' : '"潛意識學習"'}
-            </h3>
+            </h4>
 
           </div>
           <div className={utilStyles.fiveinline}>
-            <h3>
+            <h4>
               {language === 'en' ? '"Focused Learning"' : '"專注學習"'}
-            </h3>
+            </h4>
           </div>
         </div>
         <div className={utilStyles.flexc}>
@@ -130,53 +130,51 @@ export default function Home() {
         </div>
         <div className={utilStyles.flexc}>
           <div className={formStyles.twomode}>
-            <h1 className={formStyles.twomodeheader}>Child</h1>
-            <h3>(1) 2000/hr NTD</h3>
-            <h3>(2) 3000/hr NTD</h3>
+            <h3 className={formStyles.twomodeheader}>Child</h3>
+            <h4>(1) 2000/hr NTD</h4>
+            <h4>(2) 3000/hr NTD</h4>
           </div>
           <div className={formStyles.twomode}>
-            <h1 className={formStyles.twomodeheader}>Adult</h1>
-            <h3>3000/hr NTD</h3>
+            <h3 className={formStyles.twomodeheader}>Adult</h3>
+            <h4>3000/hr NTD</h4>
           </div>
         </div>
         <div>
-          {/* <img
-            src="/images/accent d.svg"
-          /> */}
-          <h3>
+
+          <h4>
             {language === 'en' ? '**Note: Some children may be more suitable for "Focused Learning"' : ''}
-          </h3>
+          </h4>
         </div>
       </section>
-      <div className={utilStyles.space}></div>
+      {/* <div className={utilStyles.space}></div> */}
       <section className={utilStyles.headingMd}>
         <h1 className={utilStyles.headingXl}>
           {language === 'en' ? 'What will I Learn ?' : '我會學到什麼 ?'} </h1>
-        <h3>
+        <h4>
           {language === 'en' ? 'In-person demonstrations, practicing, corrections graphics are intende as a general idea of what may be covered' : '面對面方式, 盡可能提供涵蓋一般概念的示範、練習、修正嘴型'}
-        </h3>
+        </h4>
         <div>
           <div className={utilStyles.fiveinline}>
             <img
               src="/images/accent e.svg"
               className={utilStyles.imagesmall}
             />
-            <h3>{language === 'en' ? `"rrr" sound` : `"rrr"音`}</h3>
+            <h4>{language === 'en' ? `"rrr" sound` : `"rrr"音`}</h4>
             <img
               src="/images/accent f.svg"
               className={utilStyles.imagesmall}
             />
-            <h3>{language === 'en' ? `native  Asian speaker's "L" sound` : `母語為亞洲語言的人的"L"音`}</h3>
+            <h4>{language === 'en' ? `native  Asian speaker's "L" sound` : `母語為亞洲語言的人的"L"音`}</h4>
             <img
               src="/images/accent g.svg"
               className={utilStyles.imagesmall}
             />
-            <h3>{language === 'en' ? `native English speaker's "L sound"` : `母語為英語的人的"L"音`}</h3>
+            <h4>{language === 'en' ? `native English speaker's "L sound"` : `母語為英語的人的"L"音`}</h4>
           </div>
           <div className={utilStyles.fiveinline}>
-            <h3 className={utilStyles.headingLg}>TONGUE POSITION</h3>
-            <img
-              src="/images/accent h.svg"
+            <h4 className={utilStyles.headingLg}>TONGUE POSITION</h4>
+            <object
+              data="/svg/accent h animated.svg"
               className={utilStyles.imagesmall}
             />
 
@@ -184,19 +182,19 @@ export default function Home() {
         </div>
         <div>
           <div className={utilStyles.threeinline}>
-            <h3>{language === 'en' ? 'JAW POSTITON' : '下巴位置'}</h3>
+            <h4>{language === 'en' ? 'JAW POSTITON' : '下巴位置'}</h4>
             <img
               src="/images/accent i.svg"
             />
           </div>
           <div className={utilStyles.threeinline}>
-            <h3>{language === 'en' ? 'LIP POSITON' : '嘴唇位置'}</h3>
+            <h4>{language === 'en' ? 'LIP POSITON' : '嘴唇位置'}</h4>
             <img
               src="/images/accent j.svg"
             />
           </div>
           <div className={utilStyles.threeinline}>
-            <h3>{language === 'en' ? 'PRESSURE/SPEED' : '壓力/語速'}</h3>
+            <h4>{language === 'en' ? 'PRESSURE/SPEED' : '壓力/語速'}</h4>
             <img
               src="/images/accent k.svg"
 
@@ -205,7 +203,7 @@ export default function Home() {
         </div>
 
         <div>
-          <h3>{language === 'en' ? 'SPEAKING STYLES' : '說話風格'} </h3>
+          <h4>{language === 'en' ? 'SPEAKING STYLES' : '說話風格'} </h4>
           <div className={utilStyles.fiveinline}>
             <img
               src="/images/accent l.svg"
@@ -231,7 +229,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div className={utilStyles.space}></div>
+      {/* <div className={utilStyles.space}></div> */}
       <section className={utilStyles.headingMd}>
         <h1 className={utilStyles.headingXl}>
           {language === 'en' ? 'What to expect ?' : '期待有什麼樣收穫 ?'} </h1>
@@ -274,61 +272,64 @@ export default function Home() {
 
       </section>
 
-      <div className={utilStyles.space}></div>
+      {/* <div className={utilStyles.space}></div> */}
       <section className={utilStyles.headingMd}>
         <h1 className={utilStyles.headingXl}>
-          {language === 'en' ? 'Reality Sessions' : '期待什麼結果 ?'} </h1>
+          {language === 'en' ? 'Reality Sessions' : '期待什麼結果 ?'}
+        </h1>
 
-        <p>{language === 'en' ? `Real World Practice, if suitable, solidifies the learning experience. This is the glue to take what;s been learned and then put into action.
+          <p>{language === 'en' ? `Real World Practice, if suitable, solidifies the learning experience. This is the glue to take what;s been learned and then put into action.
       Live analysis and self-recording have been proven to make massive impact.` : '實際的實踐經驗，如果適當的話，能夠鞏固學習體驗。這是將所學知識付諸行動的黏合劑。實時分析和自我錄製已被證明能產生巨大的影響。'}</p>
-        <img
-          src="/images/accent o.svg"
+     
+        <object
+          data="/svg/accent o animated.svg"
           className={utilStyles.imagesmall}
         />
       </section>
 
       <section className={utilStyles.headingMd}>
         <h1 className={utilStyles.headingXl}>
-          {language === 'en' ? 'FAQ' : 'FAQ'} </h1>
+          {language === 'en' ? 'FAQ' : 'FAQ'}
+        </h1>
         <div className={`${utilStyles.textMd} ${utilStyles.textbox}`}>
           <div className={formStyles.faqcontanier}>
             <div className={formStyles.question} >
               <p>{language === 'en' ? '1.Do I need to prepare anything beforehand?' : '1.上課前需要準備什麼?'}</p>
-              
-              {q1option 
-              ? <img src='/icon/up_icon.png' onClick={() => setQ1option(false)}></img>
-              :  <img src='/icon/down_icon.png' onClick={() => setQ1option(true)}></img>
-            }            
-           </div>
-         {q1option &&
+
+              {q1option
+                ? <img src='/icon/up_icon.png' onClick={() => setQ1option(false)}></img>
+                : <img src='/icon/down_icon.png' onClick={() => setQ1option(true)}></img>
+              }
+            </div>
+            {q1option &&
               <div className={formStyles.answer}>
-                {language === 'en' ? 
-                <p>Please make sure to send your sample recording before your session. <Link href="/new">Here</Link> </p> :<p>請務必先到 <Link href="/new">Here</Link> 錄下您的口說錄音</p>}
+                {language === 'en' ?
+                  <p>Please make sure to send your <span className={formStyles.inlinelink} ><Link href="/new">sample recording</Link></span> before your session.</p> : <p>請確認有先到 <span className={formStyles.inlinelink} ><Link href="/new">測試</Link></span> 錄下您的口說錄音</p>}
               </div>
-         }
-         </div>
+            }
+          </div>
           <div className={formStyles.faqcontanier}>
             <div className={formStyles.question}>
               <p>{language === 'en' ? '2. How do I sign up?' : '2.怎麼預約課程?'}</p>
-              {q2option 
-              ? <img src='/icon/up_icon.png' onClick={() => setQ2option(false)}></img>
-              :  <img src='/icon/down_icon.png' onClick={() => setQ2option(true)}></img>
-            }    
+              {q2option
+                ? <img src='/icon/up_icon.png' onClick={() => setQ2option(false)}></img>
+                : <img src='/icon/down_icon.png' onClick={() => setQ2option(true)}></img>
+              }
             </div>
             {q2option &&
               <div className={formStyles.answer}>
-                {language === 'en' ? 
-                <p><Link href="/booking">Here</Link> 100% Refundable over 48 hours before session</p> : <p> 在這裡 <Link href="/booking">Here</Link>預約, 在開始前48小時前取消免費退款</p>}
+                {language === 'en' ?
+                  <p><span className={formStyles.inlinelink} ><Link href="/booking">Book Here</Link></span>, 100% Refundable over 48 hours before session</p> : <p> 在這裡 <span className={formStyles.inlinelink} ><Link href="/booking">預約</Link></span>, 在開始前48小時前取消免費退款</p>}
               </div>
             }
           </div>
           <div className={formStyles.faqcontanier}>
             <div className={formStyles.question}>
               {language === 'en' ? '3. Where is the class located?' : '3.我們會在哪裡上課?'}
-              {q3option 
-              ? <img src='/icon/up_icon.png' onClick={() => setQ3option(false)}></img>
-              :  <img src='/icon/down_icon.png' onClick={() => setQ3option(true)}></img>
-            }    
+              {q3option
+                ? <img src='/icon/up_icon.png' onClick={() => setQ3option(false)}></img>
+                : <img src='/icon/down_icon.png' onClick={() => setQ3option(true)}></img>
+              }
             </div>
             {q3option &&
               <div className={formStyles.answer}>{language === 'en' ? 'Indoor community area 5 minute walk from Jiantan MRT station' : '安排在室內開放空間, 距離劍潭捷運站走路約5分鐘'}</div>
@@ -337,27 +338,27 @@ export default function Home() {
           <div className={formStyles.faqcontanier}>
             <div className={formStyles.question}>
               {language === 'en' ? "4. How do I know if I'm improving?" : '4.我怎麼持續進步？'}
-              {q4option 
-              ? <img src='/icon/up_icon.png' onClick={() => setQ4option(false)}></img>
-              :  <img src='/icon/down_icon.png' onClick={() => setQ4option(true)}></img>
-            }    
+              {q4option
+                ? <img src='/icon/up_icon.png' onClick={() => setQ4option(false)}></img>
+                : <img src='/icon/down_icon.png' onClick={() => setQ4option(true)}></img>
+              }
             </div>
             {q4option &&
-            <div className={formStyles.answer}>{language === 'en' ? "Recordings from each class + homework assignments will be proof of progress." : '在課堂上您可以錄音, 課後完成指派的回家作業'}</div>
+              <div className={formStyles.answer}>{language === 'en' ? "Recordings from each class + homework assignments will be proof of progress." : '在課堂上您可以錄音, 課後完成指派的回家作業'}</div>
             }
-            </div>
+          </div>
           <div className={formStyles.faqcontanier}>
             <div className={formStyles.question}>
               {language === 'en' ? "5. I know it's an accent class, but is it also an English language class?" : '5.我知道這是美式口音課程, 但這也是英文課？'}
-              {q5option 
-              ? <img src='/icon/up_icon.png' onClick={() => setQ5option(false)}></img>
-              :  <img src='/icon/down_icon.png' onClick={() => setQ5option(true)}></img>
-            }     
+              {q5option
+                ? <img src='/icon/up_icon.png' onClick={() => setQ5option(false)}></img>
+                : <img src='/icon/down_icon.png' onClick={() => setQ5option(true)}></img>
+              }
             </div>
             {q5option &&
-            <div className={formStyles.answer}>{language === 'en' ? 'No. You will most certainly be introduced to new vocabulary and inevitably be taught how to use them, but this is not designed to be an English course. If you want, you may also sign up for customized English classes for learning if deemed eligible.  Your American accent coach does not speak Chinese.' : '不是。你肯定會接觸到一些新詞彙，不能避免老師會教您如何使用它們，但本課程並不是設計為一堂英語課程。如果有意願也符合資格的話，也跟我們報名專門客制的英語課程。美式口語老師在課堂上不會使用中文。'}</div>
+              <div className={formStyles.answer}>{language === 'en' ? 'No. You will most certainly be introduced to new vocabulary and inevitably be taught how to use them, but this is not designed to be an English course. If you want, you may also sign up for customized English classes for learning if deemed eligible.  Your American accent coach does not speak Chinese.' : '不是。你肯定會接觸到一些新詞彙，不能避免老師會教您如何使用它們，但本課程並不是設計為一堂英語課程。如果有意願也符合資格的話，也跟我們報名專門客制的英語課程。美式口語老師在課堂上不會使用中文。'}</div>
             }
-            </div>
+          </div>
         </div>
       </section>
     </Layout >

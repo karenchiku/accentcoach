@@ -5,22 +5,26 @@ import Head from 'next/head';
 import utilStyles from '../styles/utils.module.css'
 import formStyles from '../styles/form.module.css'
 import { checkEmail } from '../components/utils/email'
+import { headers } from 'next/dist/client/components/headers';
 
 export default function paymentsucess() {
     const [email, setEmail] = useState('');
-    const [isValidEmail, setIsValidEmail] = useState(true);
+    const [isvalidEmail, setIsValidEmail] = useState(true);
     const [username, setUserName] = useState('');
     const [recording, setRecording] = useState(false);
+    const [audioBlobFile, setAudioBlob] = useState(null);
     const [audioURL, setAudioURL] = useState('');
     const mediaRecorderRef = useRef(null);
     const audioChunksRef = useRef([]);
-    const [audiobuffer, setAudioBuffer] = useState(null);
+
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isHasRecording, setIshasRecording] = useState(false);
     const [isSentRecording, setSentRecording] = useState(false);
-
+    // const [formData, setFormData] = useState('')
     const handleStartRecording = async () => {
+        setRecording(false);
         setAudioURL('');
+        // audioChunksRef.current = [];
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         mediaRecorderRef.current = new MediaRecorder(stream);
         mediaRecorderRef.current.ondataavailable = (event) => {
@@ -30,10 +34,8 @@ export default function paymentsucess() {
         };
         mediaRecorderRef.current.onstop = async () => {
             const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
-            // console.log(await audioBlob.arrayBuffer());
-            setAudioBuffer (await audioBlob.arrayBuffer().toString('base64'));
+            setAudioBlob(audioBlob);
             const audioUrl = URL.createObjectURL(audioBlob);
-            // console.log(audioUrl);
             setAudioURL(audioUrl);
             audioChunksRef.current = [];
         };
@@ -55,17 +57,18 @@ export default function paymentsucess() {
     };
 
     const handleSubmitRecording = async () => {
-        if(email && username){
-            SubmitRecording()
+        if (email && username && isvalidEmail) {
+            await SubmitRecording()
         }
-        else{
+        else {
             alert('請輸入完整的email和電話')
         }
     };
     const SubmitRecording = async () => {
+
         setIsSubmitting(true);
         setSentRecording(false);
-        
+
         const responserecording = await fetch('/api/get-recording', {
             method: 'POST',
             body: JSON.stringify({ email }),
@@ -76,31 +79,77 @@ export default function paymentsucess() {
         const datarecording = await responserecording.json();
 
         if (datarecording.length != 0) {
-            // console.log(datarecording);
             setIshasRecording(true);
         } else {
+            console.log(audioURL);
 
-            console.log('start recording');
-            await fetch('/api/create-recording', {
-                method: 'POST',
-                body: JSON.stringify({ username, email, audiobuffer }),
-                headers: {
-                    'Content-Type': 'application/json'
+            // create a new recording
+
+            // console.log('create recording');
+            // await fetch('/api/create-recording', {
+            //     method: 'POST',
+            //     body: JSON.stringify({ username, email }),
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     }
+            // })
+            //     .then(res => res.json())
+            //     .then(data => {
+            //         if (data.message == 'success') {
+            //             setSentRecording(true);
+
+            //         }
+            //     })
+            //     .catch((err) => {
+            //         console.error(err);
+            //     })
+
+            const formData = new FormData();
+            formData.append('audio', audioBlobFile, 'aduio.wav')
+            formData.append('username', username)
+            console.log(username)
+            try {
+                const response = await fetch('/api/send-audioemail', {
+                    method: 'POST',
+                    body: formData,
+
+
+                });
+                const data = await response.json();
+                console.log(data);
+                if (data.message == 'success') {
+                    setSentRecording(true);
                 }
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.result == 'ok') {
-                        setSentRecording(true);
+            } catch (error) {
+                console.error('Error uploading audio:', error);
+            }
 
-                    }
-                })
-                .catch((err) => {
-                    console.error(err);
-                })
         }
         setIsSubmitting(false);
+
+
     }
+    // const sendToAPI = async (audioBlob) => {
+    //     const formData = new FormData();
+    //     formData.append('audio', audioBlob, 'aduio.wav')
+    //     formData.append('username', username)
+
+
+    //     try {
+    //         const response = await fetch('/api/send-audioemail', {
+    //             method: 'POST',
+    //             body: formData,
+
+    //         });
+    //         const data = await response.json();
+    //         console.log(data);
+    //         if (data.message == 'success') {
+    //             setSentRecording(true);
+    //         }
+    //     } catch (error) {
+    //         console.error('Error uploading audio:', error);
+    //     }
+    // }
     return (
         <Layout>
             <Head>
@@ -108,7 +157,7 @@ export default function paymentsucess() {
                 <meta name="robots" content="noindex,nofollow" />
             </Head>
             <section>
-                <div className={`${utilStyles.textMd} ${formStyles.content}`}>
+                <div className={`${utilStyles.textMd} ${formStyles.formcontent}`}>
 
                     <div className={formStyles.formtitle}>
                         <h1>錄下你/妳的發音</h1>
@@ -129,22 +178,29 @@ export default function paymentsucess() {
                     </div>
                     {audioURL && (
                         <div className={formStyles.audioresult}>
-                            <audio controls src={audioURL} type="audio/mpeg" />
+                            <audio controls src={audioURL} type="audio/wav" />
+                            <div className={formStyles.inputcontent}>
+                                <div className={formStyles.inputcontanier}>
+                                    {/* <div className={formStyles.inputlabel}>Name</div> */}
+                                    <div className={formStyles.inputbox} >
+                                        <input className={formStyles.input} placeholder="jacky cheng" type="text" value={username} onChange={(e) => setUserName(e.target.value)} />
+                                    </div>
+                                </div>
+                                <div className={formStyles.inputcontanier}>
+                                    {/* <div className={formStyles.inputlabel}>Email</div> */}
 
-                            <div className={formStyles.inputcontanier}>
-                                <div className={formStyles.inputlabel}>您的名子</div>
-                                <input className={formStyles.input} placeholder="jacky cheng" type="text" value={username} onChange={(e) => setUserName(e.target.value)} />
-                            </div>
-                            <div className={formStyles.inputcontanier}>
-                                <div className={formStyles.inputlabel}>Email</div>
-                                <input className={formStyles.input} placeholder="jackycheng@gmail.com" type="email" value={email} onChange={handleEmailChange} />
-                                {!isValidEmail && <p className={formStyles.invalid}>請輸入正確email</p>}
-                            </div>
-                            <div className={utilStyles.flexcc}>
-                                { !isHasRecording && !isSentRecording && <button className={formStyles.button} onClick={handleSubmitRecording}>傳送錄音</button>}
-                                {isSubmitting && <p>傳送中...</p>}
-                                {isHasRecording && <p>未傳送, 相同信箱已傳送過錄音!</p>}
-                                {isSentRecording && <p>已傳送</p>}
+                                    <div className={formStyles.inputbox} >
+                                        <input className={formStyles.input} placeholder="jackycheng@gmail.com" type="email" value={email} onChange={handleEmailChange} />
+                                        {!isvalidEmail && <span className={`${formStyles.invalid} ${formStyles.textSm}`}>請輸入正確email</span>}
+                                    </div>
+                                </div>
+
+                                <div className={utilStyles.flexcc}>
+                                    {!isHasRecording && !isSentRecording && <button className={formStyles.button} onClick={handleSubmitRecording}>傳送錄音</button>}
+                                    {isSubmitting && <p>傳送中...</p>}
+                                    {isHasRecording && <p>未傳送, something goes wrong!</p>}
+                                    {isSentRecording && <p>已傳送錄音給老師</p>}
+                                </div>
                             </div>
                             <div className={utilStyles.textSm}>
                                 <div className={utilStyles.pbold}>注意事項</div>

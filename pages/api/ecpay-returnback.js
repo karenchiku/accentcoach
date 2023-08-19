@@ -15,22 +15,48 @@ export default async function ecpaycallback(req, res) {
     return res.status(405).end(); // Method Not Allowed
   }
 
+
   const { RtnCode, RtnMsg, MerchantID, MerchantTradeNo, PaymentDate, PaymentType, PaymentTypeChargeFee, TradeNo, TradeDate, TradeAmt, CheckMacValue } = req.body
   const data = req.body
-
+  console.log('before delete', data)
   delete data.CheckMacValue;
+  console.log('after delete', data)
+  
   const calculateCheckMacValue = computeCheckMacValue(data);
-  // console.log(data)
 
   if (1 == 1) {  // chage to chcekmacvalue
     await handleResult(RtnCode, RtnMsg, MerchantID, MerchantTradeNo, PaymentDate, PaymentType, PaymentTypeChargeFee, TradeNo, TradeDate, TradeAmt, CheckMacValue, calculateCheckMacValue)
+    
+    
     res.status(200).send('1|OK')
+
   } else {
     res.status(400).send('0|FAIL')
   }
 
 
 }
+//updata the rtncode to the database
+async function handleRtncode(RtnCode,MerchantTradeNo,PaymentDate){
+  try {
+    await pool.connect();
+    const request = new sql.Request(pool);
+    request.input('MerchantTradeNo', sql.VarChar, MerchantTradeNo);
+    request.input('RtnCode', sql.VarChar, RtnCode);
+    request.input('PaymentDate', sql.DateTime, PaymentDate);
+    const result = await request.query(`
+        UPDATE [accentcoach_bookings]
+        SET paystatus = @RtnCode , payment_completed_datetime = @PaymentDate
+        WHERE orderid = @MerchantTradeNo
+    `);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    await pool.close();
+  }
+
+}
+//insert the result to database 
 async function handleResult(RtnCode, RtnMsg, MerchantID, MerchantTradeNo, PaymentDate, PaymentType, PaymentTypeChargeFee, TradeNo, TradeDate, TradeAmt, CheckMacValue, calculateCheckMacValue) {
   try {
     await pool.connect();

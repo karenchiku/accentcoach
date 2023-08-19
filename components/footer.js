@@ -80,12 +80,12 @@ export default function Footer() {
                 </div>
 
                 <div className={footerStyles.undertext}>
-                    <p>2023 Copyright © All Rights Reserverd. Designed by KUCH</p>
+                    <p>2023 Copyright © All Rights Reserverd.</p>
                 </div>
              
          
             </div>
-            <div className={utilStyles.space}></div>
+            {/* <div className={utilStyles.space}></div> */}
         </div>
     )
 }

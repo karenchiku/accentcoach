@@ -58,6 +58,7 @@ th {
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
+
 section{
   margin: 0;
   /* background-color: rgb(153, 153, 253); */

@@ -19,21 +19,21 @@ export default function querybooking() {
   const [isOrders, setIsOrders] = useState(false)
 
 
-  const handleEmailChange = (e) => {
-    const enteredEmail = e.target.value;
+  const handleEmailChange = () => {
+    // const enteredEmail = e.target.value;
     const isValid = checkEmail(enteredEmail);
     setEmail(enteredEmail);
     setIsValidEmail(isValid);
   };
 
-  const handleSubmit = async (e) => {
-    if( phone && email){
-        Submit();
-    }else{
+  const handleSubmit = async () => {
+    if (phone && email) {
+      Submit();
+    } else {
       alert('請輸入完整的email和電話')
     }
   };
-  const Submit = async (e) => {
+  const Submit = async () => {
     setIsSubmitting(true);
     await fetch('/api/get-bookinghist', {
       method: 'POST',
@@ -43,7 +43,8 @@ export default function querybooking() {
       }
     })
       .then(res => res.json())
-      .then(data => {ß
+      .then(data => {
+        ß
         setOrders(data)
         if (data) {
           setIsOrders(true);
@@ -62,32 +63,33 @@ export default function querybooking() {
         <title>{siteTitle}</title>
       </Head>
       <section>
-        <div className={`${utilStyles.textMd} ${formStyles.content}`}>
+        <div className={`${utilStyles.textMd} ${formStyles.formcontent}`}>
           <div className={formStyles.formtitle}>
             <h1>預約查詢</h1>
           </div>
-          <div>
+          <div className={formStyles.inputcontent}>
             <div className={formStyles.inputcontanier}>
-              <div className={formStyles.inputlabel}><p>連絡電話*:</p></div>
-              <input className={formStyles.input} type="text" value={phone} onChange={(e) => setPhone(e.target.value)} />
+              <div className={formStyles.inputbox} >
+                <input placeholder='09xx xxx xxx' className={formStyles.input} type="text" value={phone} onChange={(e) => setPhone(e.target.value)} />
+              </div>
             </div>
             <div className={formStyles.inputcontanier}>
-              <div className={formStyles.inputlabel}><p>email*:</p></div>
-              <input className={formStyles.input} type="email" value={email} onChange={handleEmailChange} />
-              {!isValidEmail && <p className={formStyles.invalid}>請輸入正確email</p>}
+              <div className={formStyles.inputbox} >
+                <input placeholder='jackycheng@gmail.com' className={formStyles.input} type="email" value={email} onChange={handleEmailChange} />
+                {!isValidEmail && <p className={formStyles.invalid}>請輸入正確email</p>}
+              </div>
             </div>
 
-            <div className={utilStyles.flexcc}>
-              <button className={formStyles.button} onClick={handleSubmit}>查詢預約</button>
-              {isSubmitting ? ' 查詢中...' : ''}
-            </div>
-
+            {/* <div className={utilStyles.flexcc}> */}
+            <button className={formStyles.button} onClick={handleSubmit}>查詢預約</button>
+            {isSubmitting ? ' 查詢中...' : ''}
+            {/* </div> */}
+           
             <div className={utilStyles.textSm}>
               <div className={utilStyles.pbold}>注意事項</div>
               <p>*請務必填寫與預約時相同的<span className={utilStyles.pbold}>電話與email</span></p>
-
             </div>
-          </div>
+            </div>
         </div>
       </section>
       {isOrders ? (

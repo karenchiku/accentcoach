@@ -6,7 +6,10 @@ const ECPAY_PAYMENT_API_URL = 'https://payment-stage.ecpay.com.tw/Cashier/AioChe
 const MERCHANT_ID = process.env.MERCHANT_ID;
 
 export default async function ecpayinfo(req, res) {
-  if (req.method === 'POST') {
+  if (req.method !== 'POST') {
+    return res.status(405).end(); // Method Not Allowed
+  }
+  try {
     const { orderid, amount, itemname, bookingdate, email } = req.body;
 
     let data = {
@@ -29,9 +32,11 @@ export default async function ecpayinfo(req, res) {
     data.CheckMacValue = checkMacValue;
     // console.log(data)
     res.status(200).send(data);
-  } else {
-    res.status(404).end();
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error creating machine code' });
   }
+
 
 };
 

@@ -4,8 +4,10 @@ import config from '../../config/config';
 const pool = new sql.ConnectionPool(config);
 
 export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).end(); // Method Not Allowed
+  }
 
-  if (req.method === 'POST') {
     try {
       await pool.connect();
 
@@ -20,9 +22,5 @@ export default async function handler(req, res) {
     } finally {
       await pool.close();
     }
-  } else {
-    res.status(404).end();
-  }
-
 
 }
