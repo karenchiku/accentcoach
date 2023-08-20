@@ -45,7 +45,7 @@
   color: #e5e5e5;
   margin: 1rem 0.5rem;
   padding: 0.5rem 0.5rem;
-  border-radius:8px;
+  border-radius:20px;
   opacity: 1;
   transition: all 0.3s;
   font-size: 16px;
@@ -55,7 +55,7 @@
 
 .button:hover {
   /* box-shadow: 0px 15px 20px rgba(128, 110, 114, 0.3); */
-  background-color: #e5e5e5;
+  background-color: #fff;
   color: black;
   transform: translateY(-2px);
 }
@@ -75,18 +75,16 @@
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 1);
 }
 
-
 .formcontent{
-  padding: 0.5rem 3rem;
+  padding: 0.5rem 6rem;
   min-height: 300px ;
+  border-radius: 5px;
   /* background-color: red; */
-  border: 2px solid #e5e5e5;
+  border: 1px solid #e5e5e5;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
   /* color: #e5e5e5; */
 }
 
-.inputcontent{
-  padding: 0 3rem;
-}
 .inputcontanier{
   width: 100%;
   display: flex;
@@ -111,6 +109,20 @@
   font-size: 14px;
   margin: 0;
   padding: 0;
+}
+.confirmbox{
+  padding: 0 2rem;
+}
+
+.confirmbox .line{
+  border-bottom: 1px solid #e5e5e5;
+  margin: 1rem 0; 
+}
+
+.confirmcontainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .faqcontanier{
@@ -139,9 +151,7 @@
 @media (max-width: 1000px) {
 
   .formcontent{
-    padding: 0.5rem;
+    padding: 1rem;
   }
-  .inputcontent{
-    padding: 0 0.5rem;
-  }
+
 }

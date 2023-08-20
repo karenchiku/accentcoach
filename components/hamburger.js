@@ -21,9 +21,10 @@ export default function () {
 
                 <ul className={hamburgerStyles.menubar}>
                     <li> <Link key="canonical" href="/">首頁</Link></li>
-                    <li> <Link href="/new">測試</Link></li>
-                    <li> <Link href="/search">查詢</Link></li>
                     <li> <Link href="/booking">預約</Link></li>
+                    <li> <Link href="/new">測驗</Link></li>
+                    <li> <Link href="/search">查詢預約</Link></li>
+                
                 </ul>
 
             </div>

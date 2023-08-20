@@ -14,7 +14,7 @@ export default async function handler(req, res) {
       await pool.connect();
 
        const orderid = `T${(new Date()).getTime()}${Math.floor(Math.random() * 100)}`;
-      const {  username, phone, email, itemname, amount, bookingdate } = req.body;
+      const {  username, phone, email, itemname, amount, bookingdate, allowtosend } = req.body;
       const request = new sql.Request(pool);
       request.input('username', sql.NVarChar, username);
       request.input('phone', sql.VarChar, phone);
@@ -24,11 +24,12 @@ export default async function handler(req, res) {
       request.input('bookingdate', sql.DateTime, bookingdate);
       request.input('orderid', sql.VarChar, orderid);
       request.input('created_datetime', sql.DateTime, new Date());
+      request.input('allowtosend', sql.Bit, allowtosend);
 
 
       const result = await request.query(`
-        INSERT INTO accentcoach_bookings (orderid, username, phone, email, itemname, amount, bookingdate, created_datetime, paystatus, bookstatus)
-        VALUES (@orderid, @username, @phone, @email, @itemname, @amount, @bookingdate, @created_datetime, 0,0)
+        INSERT INTO accentcoach_bookings (orderid, username, phone, email, itemname, amount, bookingdate, created_datetime, paystatus, bookstatus, allowtosend)
+        VALUES (@orderid, @username, @phone, @email, @itemname, @amount, @bookingdate, @created_datetime, 0,0, @allowtosend)
       `);
 
       res.status(200).json({orderid});

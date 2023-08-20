@@ -5,14 +5,16 @@
 }
 
 .container {
-  max-width: 75rem;
+  max-width: 105rem;
   padding: 1.5rem 2rem;
   margin: 0 auto;
   position: relative;
+  /* background-color: red; */
 }
 
 .menu {
   padding: 0 4rem;
+  width: 50%;
   
 }
 
@@ -20,10 +22,12 @@
   display: flex;
   justify-content: center;
   margin-bottom: 4rem;
+  /* background-color: red; */
+  
 }
 
 .icon img{
-  width: 15%;
+  width: 25%;
 }
 
 .newletter{
@@ -59,9 +63,14 @@
   
   }
   .menu {
-    width: 50%;
+    width: 80%;
     margin-bottom: 2rem;
     padding: 0;
   }
+
+  .icon img{
+    width: 10%;
+  }
+  
   
 }

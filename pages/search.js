@@ -70,21 +70,21 @@ export default function querybooking() {
           <div className={formStyles.inputcontent}>
             <div className={formStyles.inputcontanier}>
               <div className={formStyles.inputbox} >
-                <input placeholder='09xx xxx xxx' className={formStyles.input} type="text" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                <input placeholder='phone' className={formStyles.input} type="text" value={phone} onChange={(e) => setPhone(e.target.value)} />
               </div>
             </div>
             <div className={formStyles.inputcontanier}>
               <div className={formStyles.inputbox} >
-                <input placeholder='jackycheng@gmail.com' className={formStyles.input} type="email" value={email} onChange={handleEmailChange} />
+                <input placeholder='email' className={formStyles.input} type="email" value={email} onChange={handleEmailChange} />
                 {!isValidEmail && <p className={formStyles.invalid}>請輸入正確email</p>}
               </div>
             </div>
 
-            {/* <div className={utilStyles.flexcc}> */}
+            <div className={utilStyles.flexccc}>
             <button className={formStyles.button} onClick={handleSubmit}>查詢預約</button>
             {isSubmitting ? ' 查詢中...' : ''}
-            {/* </div> */}
-           
+            </div>
+           <br/>
             <div className={utilStyles.textSm}>
               <div className={utilStyles.pbold}>注意事項</div>
               <p>*請務必填寫與預約時相同的<span className={utilStyles.pbold}>電話與email</span></p>

@@ -12,6 +12,7 @@ export default function Order() {
   const [username, setUserName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
+  const [allowtosend, setAllowToSend] = useState(false);
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [amount, setAmount] = useState('');
   const [itemname, setItemName] = useState('');
@@ -36,8 +37,8 @@ export default function Order() {
           setOptions(data)
         })
         .catch(error => {
-          // console.log(error);
-          router.push('/error')
+          console.log(error);
+          // router.push('/error')
         });
     }
 
@@ -65,7 +66,7 @@ export default function Order() {
 
     await fetch('/api/create-booking', {
       method: 'POST',
-      body: JSON.stringify({ username, phone, email, itemname, amount, bookingdate }),
+      body: JSON.stringify({ username, phone, email, itemname, amount, bookingdate, allowtosend }),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -109,7 +110,7 @@ export default function Order() {
             </div>
           </div>
           <br />
-          <br />
+  
           <div className={formStyles.inputcontent}>
             <div className={formStyles.inputcontanier}>
               <div className={formStyles.inputbox} >
@@ -126,15 +127,19 @@ export default function Order() {
               {/* <div className={formStyles.inputlabel}><p>email:*</p></div> */}
               <div className={formStyles.inputbox} >
                 <input className={formStyles.input} placeholder="email" type="email" value={email} onChange={handleEmailChange} />
-                {!isValidEmail && <p className={formStyles.invalid}>請輸入正確email</p>}
+                <p className={formStyles.invalid}>{!isValidEmail && '請輸入正確email'}</p>
               </div>
+            
             </div>
-
+            <div className={formStyles.inputcontanier}>   
+              <input type='checkbox' value={allowtosend} onChange={(e)=>setAllowToSend(e.target.value)}></input> 
+              <p className={utilStyles.textSm}> Yes, AccentCoach can email me with promotions and news. (optional)</p>
+         </div>
             <div className={formStyles.inputcontanier}>
               {/* <label className={formStyles.inputlabel} for="amount">大人/小孩:*</label> */}
               <div className={formStyles.inputbox} >
                 <select className={formStyles.select} id="amount" name="amount" value={itemname} onChange={(e) => { setAmount(e.target.value.split('-')[1]); setItemName(e.target.value) }}>
-                  <option value="0">大人/小孩</option>
+                  <option value="0">預約項目</option>
                   <option value="大人-3000">大人(3000)</option>
                   <option value="小孩-3000">小孩(3000)</option>
                   <option value="小孩-2500">小孩(2500)</option>
@@ -155,11 +160,11 @@ export default function Order() {
               <button className={formStyles.button} type="submit" onClick={handleSubmit}>預約課程</button>
               <p>{isSubmitting ? ' 預約中...' : ''}</p>
             </div>
-         
+         <br/>
           <div className={utilStyles.textSm}>
-            <div className={utilStyles.pbold}>注意事項</div>
-            <p>*請務必填寫正確<span className={utilStyles.pbold}>電話與email</span>, 可以透過填寫資料<span className={formStyles.inlinelink}><Link href="/search">查詢</Link></span>目前預約狀態</p>
-            <p>*取消政策:免費取消, 預約上課時間前48小時前取消可全額退款</p>
+            <p>*請務必填寫正確電話與Email便利之後<span className={formStyles.inlinelink}><Link href="/search">查詢</Link></span>目前預約狀態</p>
+            <p>*預約上課時間前48小時前取消可提供全額退款</p>
+            
           </div>
           </div>
         </div>

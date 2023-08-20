@@ -1,0 +1,14 @@
+.buttonconstaniner{
+    display: flex;
+
+}
+.buttontext{
+    cursor: pointer;
+
+
+}
+.selectedtext{
+    cursor: pointer;
+    color: #fff;
+    background-color: #000;
+}

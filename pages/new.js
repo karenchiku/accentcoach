@@ -202,10 +202,10 @@ export default function paymentsucess() {
                                     {isSentRecording && <p>已傳送錄音給老師</p>}
                                 </div>
                             </div>
+                            <br/>
                             <div className={utilStyles.textSm}>
-                                <div className={utilStyles.pbold}>注意事項</div>
-                                <p>*請務必填寫與預約時相同的<span className={utilStyles.pbold}>email</span></p>
-                                <p>*每個email僅限傳送一次</p>
+                                <p>*請務必填寫與預約時相同的Email</p>
+                    
 
                             </div>
                         </div>

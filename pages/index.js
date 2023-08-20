@@ -3,10 +3,13 @@ import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
 import formStyles from '../styles/form.module.css'
 import Link from 'next/link'
-
-import React, { useState } from 'react'
+import languagesytle from '../components/language.module.css';
+import { useState } from 'react'
+import { useRouter } from 'next/router';
+// import LanguageOption, { language } from '../components/language'
 
 export default function Home() {
+  const router = useRouter();
   const [language, setLanguage] = useState('zh');
   const [questionopen, setQuestionopen] = useState([false, false, false, false, false]);
 
@@ -17,6 +20,10 @@ export default function Home() {
   const [q5option, setQ5option] = useState(false);
 
 
+  const handleSubmit = async () => {
+    router.push('/booking')
+  }
+
   return (
     <Layout>
       <Head>
@@ -24,12 +31,18 @@ export default function Home() {
       </Head>
 
       <section className={`${utilStyles.headingMd}`}>
+        <div className={languagesytle.buttonconstaniner}>
 
-        <h1 className={utilStyles.heading2Xl}>American Accent Private Coach</h1>
+          <div className={language === 'en' ? languagesytle.selectedtext : languagesytle.buttontext} onClick={() => setLanguage('en')}>EN</div>
+          <div> | </div>
+          <div className={language === 'zh' ? languagesytle.selectedtext : languagesytle.buttontext} onClick={() => setLanguage('zh')}>CH</div>
+
+        </div>
+        {/* <h1 className={utilStyles.heading2Xl}>American Accent Private Coach</h1>
         <div className={utilStyles.flexcc}>
           {language === 'en' ? '>' : ''}<div className={language === 'en' ? utilStyles.selected : utilStyles.button} onClick={() => setLanguage('en')}>English</div>{language === 'en' ? '<' : ''}
           {language === 'zh' ? '>' : ''}<div className={language === 'zh' ? utilStyles.selected : utilStyles.button} onClick={() => setLanguage('zh')}>中文</div>{language === 'zh' ? '<' : ''}
-        </div>
+        </div> */}
       </section>
 
       <section>
@@ -38,7 +51,7 @@ export default function Home() {
             data="/svg/accent a animated.svg"
             className={utilStyles.imageslarge}
           />
-   
+
         </div>
         <h3 className={utilStyles.headingLg}>
           {language === 'en' ? `What you Look like != What you SOUND like` : ' 你看起來像什麼 != 你聽起來像什麼'}
@@ -278,9 +291,9 @@ export default function Home() {
           {language === 'en' ? 'Reality Sessions' : '期待什麼結果 ?'}
         </h1>
 
-          <p>{language === 'en' ? `Real World Practice, if suitable, solidifies the learning experience. This is the glue to take what;s been learned and then put into action.
+        <p>{language === 'en' ? `Real World Practice, if suitable, solidifies the learning experience. This is the glue to take what;s been learned and then put into action.
       Live analysis and self-recording have been proven to make massive impact.` : '實際的實踐經驗，如果適當的話，能夠鞏固學習體驗。這是將所學知識付諸行動的黏合劑。實時分析和自我錄製已被證明能產生巨大的影響。'}</p>
-     
+
         <object
           data="/svg/accent o animated.svg"
           className={utilStyles.imagesmall}
@@ -359,6 +372,13 @@ export default function Home() {
               <div className={formStyles.answer}>{language === 'en' ? 'No. You will most certainly be introduced to new vocabulary and inevitably be taught how to use them, but this is not designed to be an English course. If you want, you may also sign up for customized English classes for learning if deemed eligible.  Your American accent coach does not speak Chinese.' : '不是。你肯定會接觸到一些新詞彙，不能避免老師會教您如何使用它們，但本課程並不是設計為一堂英語課程。如果有意願也符合資格的話，也跟我們報名專門客制的英語課程。美式口語老師在課堂上不會使用中文。'}</div>
             }
           </div>
+        </div>
+      </section>
+
+      <section className={utilStyles.headingMd}>
+        <div className={utilStyles.flexccc}>
+          <button className={formStyles.button} type="submit" onClick={handleSubmit}>預約課程</button>
+
         </div>
       </section>
     </Layout >
