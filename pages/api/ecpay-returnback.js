@@ -21,23 +21,28 @@ export default async function ecpaycallback(req, res) {
   console.log('before delete', data)
   delete data.CheckMacValue;
   console.log('after delete', data)
-  
   const calculateCheckMacValue = computeCheckMacValue(data);
+  try {
 
-  if (1 == 1) {  // chage to chcekmacvalue
-    await handleResult(RtnCode, RtnMsg, MerchantID, MerchantTradeNo, PaymentDate, PaymentType, PaymentTypeChargeFee, TradeNo, TradeDate, TradeAmt, CheckMacValue, calculateCheckMacValue)
-    
-    
-    res.status(200).send('1|OK')
+    if (1 == 1) {  // chage to chcekmacvalue
+      await handleResult(RtnCode, RtnMsg, MerchantID, MerchantTradeNo, PaymentDate, PaymentType, PaymentTypeChargeFee, TradeNo, TradeDate, TradeAmt, CheckMacValue, calculateCheckMacValue)
+      await handleRtncode(RtnCode, MerchantTradeNo, PaymentDate)
+      await handleTimeSheet(MerchantTradeNo)
 
-  } else {
+      res.status(200).send('1|OK')
+
+    } else {
+      res.status(400).send('0|FAIL')
+    }
+
+  } catch (err) {
+    console.log(err)
     res.status(400).send('0|FAIL')
   }
 
-
 }
 //updata the rtncode to the database
-async function handleRtncode(RtnCode,MerchantTradeNo,PaymentDate){
+async function handleRtncode(RtnCode, MerchantTradeNo, PaymentDate) {
   try {
     await pool.connect();
     const request = new sql.Request(pool);
@@ -45,7 +50,7 @@ async function handleRtncode(RtnCode,MerchantTradeNo,PaymentDate){
     request.input('RtnCode', sql.VarChar, RtnCode);
     request.input('PaymentDate', sql.DateTime, PaymentDate);
     const result = await request.query(`
-        UPDATE [accentcoach_bookings]
+        UPDATE dbo.accentcoach_bookings
         SET paystatus = @RtnCode , payment_completed_datetime = @PaymentDate
         WHERE orderid = @MerchantTradeNo
     `);
@@ -54,8 +59,24 @@ async function handleRtncode(RtnCode,MerchantTradeNo,PaymentDate){
   } finally {
     await pool.close();
   }
-
 }
+
+//updata the rtncode to the database
+async function handleTimeSheet(RtnCode, MerchantTradeNo, PaymentDate) {
+  try {
+    await pool.connect();
+    const request = new sql.Request(pool);
+    request.input('MerchantTradeNo', sql.VarChar, MerchantTradeNo);
+    const result = await request.query(`
+        exec dbo.sp_UpdateAccentCoachTimeSheetStatus @MerchantTradeNo
+    `);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    await pool.close();
+  }
+}
+
 //insert the result to database 
 async function handleResult(RtnCode, RtnMsg, MerchantID, MerchantTradeNo, PaymentDate, PaymentType, PaymentTypeChargeFee, TradeNo, TradeDate, TradeAmt, CheckMacValue, calculateCheckMacValue) {
   try {

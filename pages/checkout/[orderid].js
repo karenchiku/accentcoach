@@ -138,7 +138,7 @@ export default function Payment() {
               </div>
                <br/>
               <div className={utilStyles.textSm}>
-                <p>*By completed this appointment, you agree to AccentCoach's Terms of Use & Privacy Policy</p>
+                <p>*By completing this appointment, you agree to AccentCoach's Terms of Use & Privacy Policy. After confirmation, you will receive an email.</p>
               </div>
             </div>
           </div>

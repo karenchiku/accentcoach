@@ -41,6 +41,7 @@
   padding: 0.5rem 3rem;
   /* background-color: red; */
 }
+
 .textSm {
   font-size: 14px;
   line-height: 1.5;
@@ -119,11 +120,17 @@
 .three{
   width: 33.3%;
   text-align: center;
+  
 }
 
 .threeinline{
-  display:inline-block;
-  width: 33.3%;
+  /* display:inline-block; */
+  width: 32%;
+  text-align: center;
+  border: 1px solid #666;
+  border-radius: 5px;
+  margin-left: 5px;
+
 }
 
 .pbold{

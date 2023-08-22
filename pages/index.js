@@ -3,10 +3,11 @@ import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
 import formStyles from '../styles/form.module.css'
 import Link from 'next/link'
-import languagesytle from '../components/language.module.css';
+// import languagesytle from '../components/language.module.css';
 import { useState } from 'react'
 import { useRouter } from 'next/router';
-// import LanguageOption, { language } from '../components/language'
+import { LanguageOption } from '../components/language';
+
 
 export default function Home() {
   const router = useRouter();
@@ -24,26 +25,17 @@ export default function Home() {
     router.push('/booking')
   }
 
+  const handleRecording = async () => {
+    router.push('/new')
+  }
   return (
     <Layout>
       <Head>
         <title>{siteTitle}</title>
       </Head>
 
-      <section className={`${utilStyles.headingMd}`}>
-        <div className={languagesytle.buttonconstaniner}>
+      <LanguageOption language={language} setLanguage={setLanguage} />
 
-          <div className={language === 'en' ? languagesytle.selectedtext : languagesytle.buttontext} onClick={() => setLanguage('en')}>EN</div>
-          <div> | </div>
-          <div className={language === 'zh' ? languagesytle.selectedtext : languagesytle.buttontext} onClick={() => setLanguage('zh')}>CH</div>
-
-        </div>
-        {/* <h1 className={utilStyles.heading2Xl}>American Accent Private Coach</h1>
-        <div className={utilStyles.flexcc}>
-          {language === 'en' ? '>' : ''}<div className={language === 'en' ? utilStyles.selected : utilStyles.button} onClick={() => setLanguage('en')}>English</div>{language === 'en' ? '<' : ''}
-          {language === 'zh' ? '>' : ''}<div className={language === 'zh' ? utilStyles.selected : utilStyles.button} onClick={() => setLanguage('zh')}>中文</div>{language === 'zh' ? '<' : ''}
-        </div> */}
-      </section>
 
       <section>
         <div className={utilStyles.flexcc}>
@@ -53,9 +45,9 @@ export default function Home() {
           />
 
         </div>
-        <h3 className={utilStyles.headingLg}>
+        {/* <h3 className={utilStyles.headingLg}>
           {language === 'en' ? `What you Look like != What you SOUND like` : ' 你看起來像什麼 != 你聽起來像什麼'}
-        </h3>
+        </h3> */}
         <div className={utilStyles.flexcc}>
           <object
             data="/svg/accent b animated.svg"
@@ -70,7 +62,7 @@ export default function Home() {
         </h1>
 
         <h4>
-          {language === 'en' ? `We don't get to choose every aspect of our identities but we CAN CHOOSE some!` : '我們不能選擇自己各方面的身份, 但我們可以選擇其中的一部分'}
+          {/* {language === 'en' ? `We don't get to choose every aspect of our identities but we CAN CHOOSE some!` : '我們不能選擇自己各方面的身份, 但我們可以選擇其中的一部分'} */}
         </h4>
 
         <div className={`${utilStyles.textMd} ${utilStyles.textbox}`}>
@@ -144,12 +136,12 @@ export default function Home() {
         <div className={utilStyles.flexc}>
           <div className={formStyles.twomode}>
             <h3 className={formStyles.twomodeheader}>Child</h3>
-            <h4>(1) 2000/hr NTD</h4>
-            <h4>(2) 3000/hr NTD</h4>
+            <h5>(1 Child) 2000/hr NTD</h5>
+            <h5>(2 Children) 3000/hr NTD</h5>
           </div>
           <div className={formStyles.twomode}>
             <h3 className={formStyles.twomodeheader}>Adult</h3>
-            <h4>3000/hr NTD</h4>
+            <h5>(1 Adult) 3000/hr NTD</h5>
           </div>
         </div>
         <div>
@@ -164,7 +156,7 @@ export default function Home() {
         <h1 className={utilStyles.headingXl}>
           {language === 'en' ? 'What will I Learn ?' : '我會學到什麼 ?'} </h1>
         <h4>
-          {language === 'en' ? 'In-person demonstrations, practicing, corrections graphics are intende as a general idea of what may be covered' : '面對面方式, 盡可能提供涵蓋一般概念的示範、練習、修正嘴型'}
+          {language === 'en' ? 'In-person demonstrations, practicing, corrections graphics are intende as a general idea of what may be covered' : '面對面方式, 盡可能涵蓋一般概念的示範、練習、修正嘴型'}
         </h4>
         <div>
           <div className={utilStyles.fiveinline}>
@@ -193,24 +185,23 @@ export default function Home() {
 
           </div>
         </div>
-        <div>
-          <div className={utilStyles.threeinline}>
-            <h4>{language === 'en' ? 'JAW POSTITON' : '下巴位置'}</h4>
+        <div className={utilStyles.flexc}>
+          <div className={utilStyles.three}>
+            <h4>{language === 'en' ? 'JAW POSITION' : '下巴位置'}</h4>
             <img
               src="/images/accent i.svg"
             />
           </div>
-          <div className={utilStyles.threeinline}>
-            <h4>{language === 'en' ? 'LIP POSITON' : '嘴唇位置'}</h4>
+          <div className={utilStyles.three}>
+            <h4>{language === 'en' ? 'LIP POSITION' : '嘴唇位置'}</h4>
             <img
               src="/images/accent j.svg"
             />
           </div>
-          <div className={utilStyles.threeinline}>
-            <h4>{language === 'en' ? 'PRESSURE/SPEED' : '壓力/語速'}</h4>
+          <div className={utilStyles.three}>
+            <h4>{language === 'en' ? 'PRESSURE / SPEED' : '壓力/語速'}</h4>
             <img
               src="/images/accent k.svg"
-
             />
           </div>
         </div>
@@ -233,11 +224,11 @@ export default function Home() {
           </div>
         </div>
         <div className={utilStyles.flexccc}>
-          <h3>{language === 'en' ? 'PEAKING RHYTHMS' : '閱讀朗讀'}</h3>
+          <h3>{language === 'en' ? 'SPEAKING RHYTHMS' : '說話的節奏'}</h3>
           <div className={`${utilStyles.textMd} ${utilStyles.textbox}`}>
-            <p>{language === 'en' ? ' - Reading Aloud' : ' - 說話的節奏'}</p>
+            <p>{language === 'en' ? ' - Reading Aloud' : ' - 閱讀朗讀'}</p>
             <p>{language === 'en' ? ' - Candid Thought/Response' : ' - 直覺的想法/回應'}</p>
-            <p>{language === 'en' ? ' - Prepared Speech' : ' - 預備演講'}</p>
+            <p>{language === 'en' ? ' - Prepared Speech' : ' - 演講準備'}</p>
           </div>
         </div>
       </section>
@@ -245,9 +236,9 @@ export default function Home() {
       {/* <div className={utilStyles.space}></div> */}
       <section className={utilStyles.headingMd}>
         <h1 className={utilStyles.headingXl}>
-          {language === 'en' ? 'What to expect ?' : '期待有什麼樣收穫 ?'} </h1>
+          {language === 'en' ? 'Custom ?' : '客製化 ?'} </h1>
         <p>{language === 'en' ? ` - Understand Client's Purpose and Goals` : '- 理解客戶的目的和目標'}</p>
-        <div className={`${utilStyles.textMd} ${utilStyles.textbox}`}>
+        <div className={`${utilStyles.textMd} ${utilStyles.textbox} ${utilStyles.flexc}`}>
           <div className={utilStyles.threeinline}>
             <p className={utilStyles.pbold}>{language === 'en' ? 'Business' : '商用'}</p>
             <p>{language === 'en' ? 'small business' : '小型企業'}</p>
@@ -261,7 +252,7 @@ export default function Home() {
             <p>{language === 'en' ? 'lifestyle content creator' : '生活方式內容創作者'}</p>
           </div>
           <div className={utilStyles.threeinline}>
-            <p className={utilStyles.pbold}>{language === 'en' ? 'Eductional' : '教育意義'}</p>
+            <p className={utilStyles.pbold}>{language === 'en' ? 'Eductional' : '教育性質'}</p>
             <p>{language === 'en' ? 'school' : '學校'}</p>
             <p>{language === 'en' ? 'overseas student' : '留學生'}</p>
             <p>{language === 'en' ? 'graduate research' : '研究生研究'}</p>
@@ -288,16 +279,17 @@ export default function Home() {
       {/* <div className={utilStyles.space}></div> */}
       <section className={utilStyles.headingMd}>
         <h1 className={utilStyles.headingXl}>
-          {language === 'en' ? 'Reality Sessions' : '期待什麼結果 ?'}
+          {language === 'en' ? 'Reality Sessions' : '實戰演練'}
         </h1>
 
-        <p>{language === 'en' ? `Real World Practice, if suitable, solidifies the learning experience. This is the glue to take what;s been learned and then put into action.
-      Live analysis and self-recording have been proven to make massive impact.` : '實際的實踐經驗，如果適當的話，能夠鞏固學習體驗。這是將所學知識付諸行動的黏合劑。實時分析和自我錄製已被證明能產生巨大的影響。'}</p>
-
+        <h4>{language === 'en' ? `Real World Practice, if suitable, solidifies the learning experience. This is the glue to take what‘s been learned and then put into action.
+      Live analysis and self-recording have been proven to make massive impact.` : '如果可以適當的在真實世界中實踐，能夠使學習體驗更加深入。把所學的東西付諸實踐是關鍵。實時的分析和自我記錄已證實能夠產生巨大的影響'}</h4>
+      
         <object
           data="/svg/accent o animated.svg"
-          className={utilStyles.imagesmall}
+          className={utilStyles.imagesmall} 
         />
+  
       </section>
 
       <section className={utilStyles.headingMd}>
@@ -307,7 +299,7 @@ export default function Home() {
         <div className={`${utilStyles.textMd} ${utilStyles.textbox}`}>
           <div className={formStyles.faqcontanier}>
             <div className={formStyles.question} >
-              <p>{language === 'en' ? '1.Do I need to prepare anything beforehand?' : '1.上課前需要準備什麼?'}</p>
+              <p>{language === 'en' ? '1. Do I need to prepare anything beforehand?' : '1.上課前需要準備什麼?'}</p>
 
               {q1option
                 ? <img src='/icon/up_icon.png' onClick={() => setQ1option(false)}></img>

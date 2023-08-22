@@ -98,10 +98,8 @@ export default function Order() {
           <div className={utilStyles.flexc}>
             <div className={formStyles.twomode}>
               <h3 className={formStyles.twomodeheader}>Child</h3>
-              <h5>(1) 2000/hr NTD</h5>
-              <h5>(2) 3000/hr NTD</h5>
-
-
+              <h5>(1 child) 2000/hr NTD </h5>
+              <h5>(2 children) 3000/hr NTD</h5>
             </div>
             <div className={formStyles.twomode}>
               <h3 className={formStyles.twomodeheader}>Adult</h3>
@@ -114,13 +112,13 @@ export default function Order() {
           <div className={formStyles.inputcontent}>
             <div className={formStyles.inputcontanier}>
               <div className={formStyles.inputbox} >
-                <input className={formStyles.input} placeholder="yours name" type="text" value={username} onChange={(e) => setUserName(e.target.value)} />
+                <input className={formStyles.input} placeholder="name" type="text" value={username} onChange={(e) => setUserName(e.target.value)} />
               </div>
             </div>
             <div className={formStyles.inputcontanier}>
               {/* <div className={formStyles.inputlabel}><p>連絡電話:*</p></div> */}
               <div className={formStyles.inputbox} >
-                <input className={formStyles.input} placeholder="mobile phone" type="text" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                <input className={formStyles.input} placeholder="phone" type="text" value={phone} onChange={(e) => setPhone(e.target.value)} />
               </div>
             </div>
             <div className={formStyles.inputcontanier}>
@@ -135,14 +133,15 @@ export default function Order() {
               <input type='checkbox' value={allowtosend} onChange={(e)=>setAllowToSend(e.target.value)}></input> 
               <p className={utilStyles.textSm}> Yes, AccentCoach can email me with promotions and news. (optional)</p>
          </div>
+ 
             <div className={formStyles.inputcontanier}>
               {/* <label className={formStyles.inputlabel} for="amount">大人/小孩:*</label> */}
               <div className={formStyles.inputbox} >
                 <select className={formStyles.select} id="amount" name="amount" value={itemname} onChange={(e) => { setAmount(e.target.value.split('-')[1]); setItemName(e.target.value) }}>
                   <option value="0">預約項目</option>
-                  <option value="大人-3000">大人(3000)</option>
-                  <option value="小孩-3000">小孩(3000)</option>
-                  <option value="小孩-2500">小孩(2500)</option>
+                  <option value="大人-3000-1人">大人(3000)- 1人</option>
+                  <option value="小孩-3000-2人">小孩(3000)- 2人</option>
+                  <option value="小孩-2000-1人">小孩(2000)- 1人</option>
                 </select>
               </div>
             </div>
@@ -162,7 +161,7 @@ export default function Order() {
             </div>
          <br/>
           <div className={utilStyles.textSm}>
-            <p>*請務必填寫正確電話與Email便利之後<span className={formStyles.inlinelink}><Link href="/search">查詢</Link></span>目前預約狀態</p>
+            <p>*請務必留意填寫電話與Email透過<span className={formStyles.inlinelink}><Link href="/search">查詢</Link></span>目前預約狀態</p>
             <p>*預約上課時間前48小時前取消可提供全額退款</p>
             
           </div>

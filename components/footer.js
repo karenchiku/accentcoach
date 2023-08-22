@@ -5,8 +5,6 @@ import footerStyles from './footer.module.css';
 import { useState } from 'react';
 
 
-
-
 export default function Footer() {
     const [email, setEmail] = useState('');
     const [submitSuccess, setSubmitSuccess] = useState(false)
@@ -44,8 +42,8 @@ export default function Footer() {
 
                     <div className={footerStyles.menu}>
                         <p className={utilStyles.pbold}>聯絡我們</p>
-                        <p>weekday 10:00-18:00</p>
-                        <p>accentprivatecoach@gmail.com</p>
+                        <p>工作日 10:00-18:00</p>
+                        <p>accentcoach.co@gmail.com</p>
                     </div>
                     <div className={footerStyles.menu}>
                         <p className={utilStyles.pbold}>Policy</p>

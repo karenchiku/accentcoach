@@ -1,5 +1,5 @@
 .container {
-  padding: 0 12rem;
+  padding: 0 11rem;
   margin: 0;
   /* background-color: blue; */
 }
@@ -16,8 +16,7 @@
 @media (max-width: 1000px) {
 
   .container{
-    padding: 0
-  
+    padding: 0;
   }
 }
 

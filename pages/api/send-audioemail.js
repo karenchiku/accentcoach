@@ -2,39 +2,31 @@ import nodemailer from 'nodemailer';
 import multer from 'multer';
 
 const storage = multer.memoryStorage(); // This will store the file in memory. You can use other storage options if needed.
-const upload = multer({ storage: storage }).fields([{ name: 'audio' }, { name: 'username' }]);
+const upload = multer({ storage: storage }).single('audio');
 
 const g_admin = process.env.ADMIN_EMAIL;
 const g_pass = process.env.ADMIN_PASS;
+
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).end(); // Method Not Allowed
   }
-
-  const processUpload = new Promise((resolve, reject) => {
-    upload(req, res, (err) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve();
-      }
-    });
-  });
-
   try {
-    await processUpload;
 
-    if (!req.files || !req.files.audio || req.files.audio.length === 0) {
-      return res.status(400).json({ message: 'Audio file is missing' });
-    }
-  
-    const audioFile = req.files.audio[0];
+    upload(req, res, async (err) => {
+      if (err instanceof multer.MulterError) {
+        return res.status(500).send({ error: err.message });
+      } else if (err) {
+        return res.status(500).send({ error: err.message });
+      }
+
+    const audioFile = req.file;
     const username = req.body.username;
     const email = req.body.email;
 
-    // Create a transporter object using the default SMTP transport
-    const transporter = nodemailer.createTransport({
+     // Create a transporter object using the default SMTP transport
+     const transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: {
         user: g_admin,
@@ -43,15 +35,15 @@ export default async function handler(req, res) {
     });
 
     const mailOptions = {
-      from: g_admin ,
+      from: g_admin,
       to: `${email};${g_admin}`,
       subject: 'Accent Coach Sample Recording',
-      text: `Hi ${username},\n thank you to attend your recording test, here is your recording! \n Our Accnet Coach will give you a feedback through the the email \n thank you for your paitant! `,
+      text: `Hi ${username},\nthank you to attend your recording test, here is your recording! \nOur Accnet Coach will give you a feedback through the the email\nThank you for your paitant!\n\n** Regarding the recording methods the audio might not play properly on iPhone, but it works well on the PC.`,
       attachments: [
         {
-          filename: `recoding-${username}.wav`,
+          filename: `recoding-${username}.mp3`,
           content: audioFile.buffer,
-          contentType: 'audio/wav',
+          contentType: 'audio/mp3',
         },
       ],
     };
@@ -59,6 +51,11 @@ export default async function handler(req, res) {
     // Send the email
     await transporter.sendMail(mailOptions);
     res.status(200).json({ message: 'success' });
+
+  })
+
+
+   
 
   } catch (error) {
     console.error(error);

@@ -33,7 +33,7 @@ export default function paymentsucess() {
             }
         };
         mediaRecorderRef.current.onstop = async () => {
-            const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
+            const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/mp3' });
             setAudioBlob(audioBlob);
             const audioUrl = URL.createObjectURL(audioBlob);
             setAudioURL(audioUrl);
@@ -105,14 +105,14 @@ export default function paymentsucess() {
             //     })
 
             const formData = new FormData();
-            formData.append('audio', audioBlobFile, 'aduio.wav')
+            formData.append('audio', audioBlobFile)
             formData.append('username', username)
+            formData.append('email', email)
             console.log(username)
             try {
                 const response = await fetch('/api/send-audioemail', {
                     method: 'POST',
                     body: formData,
-
 
                 });
                 const data = await response.json();
@@ -129,27 +129,7 @@ export default function paymentsucess() {
 
 
     }
-    // const sendToAPI = async (audioBlob) => {
-    //     const formData = new FormData();
-    //     formData.append('audio', audioBlob, 'aduio.wav')
-    //     formData.append('username', username)
-
-
-    //     try {
-    //         const response = await fetch('/api/send-audioemail', {
-    //             method: 'POST',
-    //             body: formData,
-
-    //         });
-    //         const data = await response.json();
-    //         console.log(data);
-    //         if (data.message == 'success') {
-    //             setSentRecording(true);
-    //         }
-    //     } catch (error) {
-    //         console.error('Error uploading audio:', error);
-    //     }
-    // }
+  
     return (
         <Layout>
             <Head>
@@ -178,24 +158,24 @@ export default function paymentsucess() {
                     </div>
                     {audioURL && (
                         <div className={formStyles.audioresult}>
-                            <audio controls src={audioURL} type="audio/wav" />
+                            <audio controls src={audioURL} type="audio/mp3" />
                             <div className={formStyles.inputcontent}>
                                 <div className={formStyles.inputcontanier}>
                                     {/* <div className={formStyles.inputlabel}>Name</div> */}
                                     <div className={formStyles.inputbox} >
-                                        <input className={formStyles.input} placeholder="jacky cheng" type="text" value={username} onChange={(e) => setUserName(e.target.value)} />
+                                        <input className={formStyles.input} placeholder="name" type="text" value={username} onChange={(e) => setUserName(e.target.value)} />
                                     </div>
                                 </div>
                                 <div className={formStyles.inputcontanier}>
                                     {/* <div className={formStyles.inputlabel}>Email</div> */}
 
                                     <div className={formStyles.inputbox} >
-                                        <input className={formStyles.input} placeholder="jackycheng@gmail.com" type="email" value={email} onChange={handleEmailChange} />
+                                        <input className={formStyles.input} placeholder="email" type="email" value={email} onChange={handleEmailChange} />
                                         {!isvalidEmail && <span className={`${formStyles.invalid} ${formStyles.textSm}`}>請輸入正確email</span>}
                                     </div>
                                 </div>
 
-                                <div className={utilStyles.flexcc}>
+                                <div className={utilStyles.flexccc}>
                                     {!isHasRecording && !isSentRecording && <button className={formStyles.button} onClick={handleSubmitRecording}>傳送錄音</button>}
                                     {isSubmitting && <p>傳送中...</p>}
                                     {isHasRecording && <p>未傳送, something goes wrong!</p>}
