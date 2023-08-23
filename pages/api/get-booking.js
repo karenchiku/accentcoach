@@ -13,11 +13,12 @@ export default async function handler(req, res) {
 
     const { orderid } = req.body;
     // console.log(orderid)
-    const query = `SELECT * FROM accentcoach_bookings WHERE orderid ='${orderid}'`;
+    const query = `SELECT * FROM dbo.accentcoach_bookings WHERE orderid ='${orderid}'`;
+    // console.log(query)
     const result = await pool.request().query(query);
-
-    res.status(200).json(result.recordset[0]);
-
+    // console.log(result.recordset[0])
+    res.status(200).json(result.recordset);
+  
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Error get booking' });

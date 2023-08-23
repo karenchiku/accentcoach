@@ -27,8 +27,8 @@ export default function Payment() {
       })
         .then(res => res.json())
         .then(data => {
-          if (data) {
-            setBooking(data);
+          if (data[0]) {
+            setBooking(data[0]);
             // console.log(booking)
             setIsLoading(false);
           }
@@ -91,7 +91,7 @@ export default function Payment() {
         <section>
           <div className={`${utilStyles.textMd} ${formStyles.formcontent}`}>
             <div className={formStyles.formtitle}>
-              <h1>預約確認及付款</h1>
+              <h1>Order Summary</h1>
             </div>
             <div className={formStyles.confirmbox}>
             
@@ -138,7 +138,7 @@ export default function Payment() {
               </div>
                <br/>
               <div className={utilStyles.textSm}>
-                <p>*By completing this appointment, you agree to AccentCoach's Terms of Use & Privacy Policy. After confirmation, you will receive an email.</p>
+                <p>*By completing this appointment, you agree to AccentCoach's Terms of Use & Privacy Policy.</p>
               </div>
             </div>
           </div>

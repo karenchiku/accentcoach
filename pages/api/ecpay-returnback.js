@@ -15,7 +15,6 @@ export default async function ecpaycallback(req, res) {
     return res.status(405).end(); // Method Not Allowed
   }
 
-
   const { RtnCode, RtnMsg, MerchantID, MerchantTradeNo, PaymentDate, PaymentType, PaymentTypeChargeFee, TradeNo, TradeDate, TradeAmt, CheckMacValue } = req.body
   const data = req.body
   console.log('before delete', data)
@@ -46,13 +45,11 @@ async function handleRtncode(RtnCode, MerchantTradeNo, PaymentDate) {
   try {
     await pool.connect();
     const request = new sql.Request(pool);
-    request.input('MerchantTradeNo', sql.VarChar, MerchantTradeNo);
+    request.input('OrderID', sql.VarChar, MerchantTradeNo);
     request.input('RtnCode', sql.VarChar, RtnCode);
     request.input('PaymentDate', sql.DateTime, PaymentDate);
     const result = await request.query(`
-        UPDATE dbo.accentcoach_bookings
-        SET paystatus = @RtnCode , payment_completed_datetime = @PaymentDate
-        WHERE orderid = @MerchantTradeNo
+        exec dbo.sp_UpdateAccentCoachBooking @OrderID, @RtnCode, @PaymentDate
     `);
   } catch (err) {
     console.log(err);
@@ -66,9 +63,9 @@ async function handleTimeSheet(RtnCode, MerchantTradeNo, PaymentDate) {
   try {
     await pool.connect();
     const request = new sql.Request(pool);
-    request.input('MerchantTradeNo', sql.VarChar, MerchantTradeNo);
+    request.input('OrderID', sql.VarChar, MerchantTradeNo);
     const result = await request.query(`
-        exec dbo.sp_UpdateAccentCoachTimeSheetStatus @MerchantTradeNo
+        exec dbo.sp_UpdateAccentCoachTimeSheetStatus @OrderID
     `);
   } catch (err) {
     console.log(err);
@@ -105,6 +102,44 @@ async function handleResult(RtnCode, RtnMsg, MerchantID, MerchantTradeNo, Paymen
   }
 }
 
+
+// before delete [Object: null prototype] {
+//   CustomField1: '',
+//   CustomField2: '',
+//   CustomField3: '',
+//   CustomField4: '',
+//   MerchantID: '2000132',
+//   MerchantTradeNo: 'T169271317319478',
+//   PaymentDate: '2023/08/22 22:07:34',
+//   PaymentType: 'Credit_CreditCard',
+//   PaymentTypeChargeFee: '60',
+//   RtnCode: '1',
+//   RtnMsg: '交易成功',
+//   SimulatePaid: '0',
+//   StoreID: '',
+//   TradeAmt: '3000',
+//   TradeDate: '2023/08/22 22:06:21',
+//   TradeNo: '2308222206216430',
+//   CheckMacValue: '0C9E116CB26A4ABE7E2397686ED5336ED07D648371DF35982F44B8678DD8F29C'
+// }
+// after delete [Object: null prototype] {
+//   CustomField1: '',
+//   CustomField2: '',
+//   CustomField3: '',
+//   CustomField4: '',
+//   MerchantID: '2000132',
+//   MerchantTradeNo: 'T169271317319478',
+//   PaymentDate: '2023/08/22 22:07:34',
+//   PaymentType: 'Credit_CreditCard',
+//   PaymentTypeChargeFee: '60',
+//   RtnCode: '1',
+//   RtnMsg: '交易成功',
+//   SimulatePaid: '0',
+//   StoreID: '',
+//   TradeAmt: '3000',
+//   TradeDate: '2023/08/22 22:06:21',
+//   TradeNo: '2308222206216430'
+// }
 
 // [Object: null prototype] {
 //   CustomField1: '',

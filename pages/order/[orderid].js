@@ -6,15 +6,16 @@ import utilStyles from '../../styles/utils.module.css'
 import formStyles from '../../styles/form.module.css'
 
 export default function paymentsucess() {
- 
+
     const router = useRouter();
     const { orderid } = router.query;
     const [booking, setBooking] = useState([]);
     const [isloading, setIsLoading] = useState(false);
-    useEffect(() => {
-   
-        const fetchData = async () => {
 
+
+    useEffect(() => {
+        setIsLoading(true);
+        const fetchData = async () => {
             await fetch('/api/get-booking', {
                 method: 'POST',
                 body: JSON.stringify({ orderid }),
@@ -24,24 +25,20 @@ export default function paymentsucess() {
             })
                 .then(res => res.json())
                 .then(data => {
-                    if (data) {
-                        setBooking(data);
-                        // console.log(booking)
-                        setIsLoading(true);
+                    if (data[0]) {
+                        setBooking(data[0]);
+                        // console.log(booking);
+                        setIsLoading(false);
                     }
-                    
 
                 })
                 .catch(error => {
                     console.log(error);
                 });
         }
-
         fetchData();
         // setIsLoading(true);
     }, [orderid])
-
-
     const handleSearch = () => {
         router.push('/searchbooking');
     };
@@ -57,44 +54,57 @@ export default function paymentsucess() {
             </Head>
             {!isloading ? (
                 <section>
-                    <div className={`${utilStyles.textMd} ${formStyles.content}`}>
+                    <div className={`${utilStyles.textMd} ${formStyles.formcontent}`}>
                         <div className={formStyles.formtitle}>
-                            <h1>付款結果 : 付款成功 </h1>
+                            {booking.paystatus == 1 && <h1>付款結果 : 付款成功 </h1> }
+                            {booking.paystatus != 1 && <h1>付款結果 : 待付款 </h1> }
                         </div>
-                        <div>
-                            <div className={utilStyles.flexcc}>
-                                <div className={utilStyles.three}><p>訂單編號：</p></div>
-                                <div className={utilStyles.five} ><p>{booking.orderid}</p></div>
+                        <div className={formStyles.confirmbox}>
+
+                            <div className={formStyles.confirmcontainer}>
+                                <div>訂單編號</div>
+                                <div>{booking.orderid}</div>
                             </div>
-                            <div className={utilStyles.flexcc}>
-                                <div className={utilStyles.three}><p>預約項目:</p></div>
-                                <div className={utilStyles.five} ><p>{booking.itemname}</p></div>
+
+                            <div className={formStyles.confirmcontainer}>
+                                <div>使用者名稱</div>
+                                <div>{booking.username}</div>
                             </div>
-                            <div className={utilStyles.flexcc}>
-                                <div className={utilStyles.three}><p>預約日期:</p></div>
-                                <div className={utilStyles.five} ><p>{booking.bookingdate}</p></div>
+
+                            <div className={formStyles.confirmcontainer}>
+                                <div>連絡電話</div>
+                                <div>{booking.phone}</div>
                             </div>
-                            <div className={utilStyles.flexcc}>
-                                <div className={utilStyles.three}><p>使用者名稱:</p></div>
-                                <div className={utilStyles.five} ><p>{booking.username}</p></div>
+
+                            <div className={formStyles.confirmcontainer}>
+                                <div>Email</div>
+                                <div>{booking.email}</div>
                             </div>
-                            <div className={utilStyles.flexcc}>
-                                <div className={utilStyles.three}><p>連絡電話:</p></div>
-                                <div className={utilStyles.five} ><p>{booking.phone}</p></div>
+
+                            <div className={formStyles.confirmcontainer}>
+                                <div>預約項目</div>
+                                <div>{booking.itemname}</div>
                             </div>
-                            <div className={utilStyles.flexcc}>
-                                <div className={utilStyles.three}><p>email:</p></div>
-                                <div className={utilStyles.five} ><p>{booking.email}</p></div>
+
+                            <div className={formStyles.confirmcontainer}>
+                                <div>預約日期</div>
+                                <div>{booking.bookingdate}</div>
                             </div>
+
+
                             <br />
                             <div className={utilStyles.flexcc}>
                                 <button className={formStyles.button} onClick={handleSearch}>查詢訂單狀態</button>
                                 <button className={formStyles.button} onClick={handleClick}>返回主頁</button>
                             </div>
+
+                            <p className={utilStyles.textSm}>感謝你的預約, 請務必在課程前到測試區錄音, 老師確認後會另外發Email到您的信箱</p>
+
+
                         </div>
                     </div>
                 </section>
-                ) : null}
+            ) : null}
         </Layout>
     );
 };

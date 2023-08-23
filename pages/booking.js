@@ -35,6 +35,7 @@ export default function Order() {
         .then(data => {
 
           setOptions(data)
+          console.log(data)
         })
         .catch(error => {
           console.log(error);
@@ -150,8 +151,8 @@ export default function Order() {
               <div className={formStyles.inputbox} >
                 <select className={formStyles.select} id="bookingdate" name="bookingdate" value={bookingdate} onChange={(e) => setBookingdate(e.target.value)}>
                   <option value="1900-01-01">預約日期時段</option>
-                  {options.map((option) => (
-                    <option value={option.opendatetime.replace('T', ' ').replace(':000Z', '')}>{option.opendatetime.replace(':00.000Z', '').replace('T', ' ')}</option>))}
+                  {options.map((option, _index) => (
+                    <option key={_index} value={option.opendatetime.replace('T', ' ').replace(':000Z', '')}>{option.opendatetime.replace(':00.000Z', '').replace('T', ' ')}</option>))}
                 </select>
               </div>
             </div>

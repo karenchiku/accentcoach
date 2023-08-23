@@ -19,15 +19,15 @@ export default function querybooking() {
   const [isOrders, setIsOrders] = useState(false)
 
 
-  const handleEmailChange = () => {
-    // const enteredEmail = e.target.value;
+  const handleEmailChange = (e) => {
+    const enteredEmail = e.target.value;
     const isValid = checkEmail(enteredEmail);
     setEmail(enteredEmail);
     setIsValidEmail(isValid);
   };
 
   const handleSubmit = async () => {
-    if (phone && email) {
+    if (phone && email && isValidEmail) {
       Submit();
     } else {
       alert('請輸入完整的email和電話')
@@ -44,7 +44,6 @@ export default function querybooking() {
     })
       .then(res => res.json())
       .then(data => {
-        ß
         setOrders(data)
         if (data) {
           setIsOrders(true);
