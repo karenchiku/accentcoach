@@ -92,8 +92,7 @@ export default function Order() {
       <section>
         <div className={`${utilStyles.textMd} ${formStyles.formcontent}`}>
           <div className={formStyles.formtitle}>
-            <h1>預約課程</h1>
-            {/* <div className={formStyles.line}></div> */}
+            <p className={utilStyles.textLg} >課程預約</p>
           </div>
 
           <div className={utilStyles.flexc}>

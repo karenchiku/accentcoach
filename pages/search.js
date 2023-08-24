@@ -64,7 +64,8 @@ export default function querybooking() {
       <section>
         <div className={`${utilStyles.textMd} ${formStyles.formcontent}`}>
           <div className={formStyles.formtitle}>
-            <h1>預約查詢</h1>
+            <p className={utilStyles.textLg} >預約查詢</p>
+          
           </div>
           <div className={formStyles.inputcontent}>
             <div className={formStyles.inputcontanier}>

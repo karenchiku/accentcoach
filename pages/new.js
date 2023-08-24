@@ -140,10 +140,10 @@ export default function paymentsucess() {
                 <div className={`${utilStyles.textMd} ${formStyles.formcontent}`}>
 
                     <div className={formStyles.formtitle}>
-                        <h1>錄下你/妳的發音</h1>
+                        <p className={utilStyles.textLg} >錄下你/妳的發音</p>
                     </div>
-
-                    <div className={utilStyles.textMd}>
+                    <br/>
+                    <div className={utilStyles.textSm}>
                         <p>請念出以下句子, 並按下錄音寄出給我們</p>
                         <p>1. Is the laundry dry yet? I’ve been waiting for hours!</p>
                         <p>2. My brother says he doesn’t have any siblings. Mom, what do you think about that?</p>

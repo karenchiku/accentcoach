@@ -91,7 +91,9 @@ export default function Payment() {
         <section>
           <div className={`${utilStyles.textMd} ${formStyles.formcontent}`}>
             <div className={formStyles.formtitle}>
-              <h1>Order Summary</h1>
+              <p>Order Summary</p>
+              <p className={utilStyles.textLg} >Order Summary</p>
+          
             </div>
             <div className={formStyles.confirmbox}>
             
