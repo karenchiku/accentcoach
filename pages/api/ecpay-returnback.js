@@ -17,17 +17,17 @@ export default async function ecpaycallback(req, res) {
 
   const { RtnCode, RtnMsg, MerchantID, MerchantTradeNo, PaymentDate, PaymentType, PaymentTypeChargeFee, TradeNo, TradeDate, TradeAmt, CheckMacValue } = req.body
   const data = req.body
-  console.log('before delete', data)
   delete data.CheckMacValue;
-  console.log('after delete', data)
   const calculateCheckMacValue = computeCheckMacValue(data);
   try {
 
     if (1 == 1) {  // chage to chcekmacvalue
       await handleResult(RtnCode, RtnMsg, MerchantID, MerchantTradeNo, PaymentDate, PaymentType, PaymentTypeChargeFee, TradeNo, TradeDate, TradeAmt, CheckMacValue, calculateCheckMacValue)
+      console.log('Insert return result ', MerchantTradeNo)
       await handleRtncode(RtnCode, MerchantTradeNo, PaymentDate)
+      console.log('Update booking ', MerchantTradeNo)
       await handleTimeSheet(MerchantTradeNo)
-
+      console.log('Update timesheet', MerchantTradeNo)
       res.status(200).send('1|OK')
 
     } else {
@@ -49,7 +49,7 @@ async function handleRtncode(RtnCode, MerchantTradeNo, PaymentDate) {
     request.input('RtnCode', sql.VarChar, RtnCode);
     request.input('PaymentDate', sql.DateTime, PaymentDate);
     const result = await request.query(`
-        exec dbo.sp_UpdateAccentCoachBooking @OrderID, @RtnCode, @PaymentDate
+        exec dbo.sp_UpdateAccentCoachBooking @OrderID,  @PaymentDate, @RtnCode
     `);
   } catch (err) {
     console.log(err);
